@@ -1,4 +1,4 @@
-library penta_core.base;
+library flutter_penta_core.base;
 
 export 'models/base_error.dart';
 export 'models/base_model.dart';

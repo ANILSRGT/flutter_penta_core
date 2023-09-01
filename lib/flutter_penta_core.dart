@@ -1,4 +1,4 @@
-library penta_core;
+library flutter_penta_core;
 
 export 'base/index.dart';
 export 'services/index.dart';

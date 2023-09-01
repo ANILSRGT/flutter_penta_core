@@ -1,4 +1,4 @@
-library penta_core.widgets;
+library flutter_penta_core.widgets;
 
 export 'pages/not_found/not_found_page.dart';
 
