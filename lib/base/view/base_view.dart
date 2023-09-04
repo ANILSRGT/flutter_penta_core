@@ -1,29 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:mobx/mobx.dart';
 
-class BaseView<T extends Store> extends StatefulWidget {
+import '../index.dart';
+
+class BaseView extends StatefulWidget {
   const BaseView({
     Key? key,
-    required this.viewModel,
+    required this.init,
     required this.onPageBuilder,
-    required this.onModelReady,
     this.onDispose,
   }) : super(key: key);
-  final Widget Function(BuildContext context, T value) onPageBuilder;
-  final T viewModel;
-  final void Function(T model) onModelReady;
+  final Widget Function(BuildContext context) onPageBuilder;
+  final VoidCallback? init;
   final VoidCallback? onDispose;
 
   @override
-  State createState() => _BaseViewState<T>();
+  State createState() => _BaseViewState();
 }
 
-class _BaseViewState<T extends Store> extends State<BaseView<T>> {
-  late T model;
+class _BaseViewState extends BaseState<BaseView> {
   @override
   void initState() {
-    model = widget.viewModel;
-    widget.onModelReady(model);
+    if (widget.init != null) widget.init?.call();
     super.initState();
   }
 
@@ -35,6 +32,6 @@ class _BaseViewState<T extends Store> extends State<BaseView<T>> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.onPageBuilder(context, model);
+    return widget.onPageBuilder(context);
   }
 }
