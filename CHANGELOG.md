@@ -20,7 +20,3 @@
   - appBar (optional)
   - goBack (optional)
   - goBackWidget (optional)
-
-## 0.0.5
-
-- Bugs fixed.
