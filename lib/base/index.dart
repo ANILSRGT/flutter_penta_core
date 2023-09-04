@@ -8,4 +8,6 @@ export 'models/iresponse_model.dart';
 
 export 'state/base_state.dart';
 
+export 'view/base_view_mvvm_with_mobx.dart';
 export 'view/base_view_mvvm.dart';
+export 'view/base_view.dart';
