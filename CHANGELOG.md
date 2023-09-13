@@ -20,3 +20,8 @@
   - appBar (optional)
   - goBack (optional)
   - goBackWidget (optional)
+
+## 0.0.5
+
+- Fixed Bug: BaseView and BaseViewMVVMWithMobx
+  - import problem fixed.

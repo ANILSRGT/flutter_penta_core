@@ -1,6 +1,6 @@
 import 'package:mobx/mobx.dart';
 
-import '../index.dart';
+import 'base_view_mvvm.dart';
 
 class BaseViewMVVMWithMobx<T extends Store> extends BaseViewMVVM<T> {
   const BaseViewMVVMWithMobx({
