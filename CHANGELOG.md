@@ -25,3 +25,9 @@
 
 - Fixed Bug: BaseView and BaseViewMVVMWithMobx
   - import problem fixed.
+
+## 0.0.6
+
+- Fixed Bug: ResponsiveWidget
+  - mounted problem fixed.
+- Extensions added. **([ReadMe ➡️ Extension](ReadMe.md#🧬-extensions))**

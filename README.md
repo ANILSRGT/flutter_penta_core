@@ -6,25 +6,55 @@ This Flutter core package contains common codes used in flutter.
 
 ### 📡 Services
 
-- [✔️] Route Service
+```
+- Route Service 📁
+```
 
 ### 📦 Base
 
-- [✔️] Models
-- [✔️] State
-- [✔️] View
+```
+- Models 🎨
+- State ☢️
+- View 📺
+```
 
 ### 🧩 Widgets
 
-- Pages
-  - [✔️] Not Found
-- Rate
-  - [✔️] Star Rate
-- [✔️] Responsive
+```
+- Pages 📄
+  - Not Found 🚫
+- Rate 🌟
+  - Star Rate ⭐
+- Responsive 📐
+```
+
+### 🧬 Extensions
+
+```
+- 📱 Context
+  - MediaQuery 📏
+  - Theme 🎨
+  - Padding 🧱
+  - Icon Size 📐
+  - Radius 📏
+  - Duration ⏳
+- String 📝
+  - Capitalize 📝
+  - Localization 🌐
+  - Convert Signle Line or Multi Line 📄
+  - Validations ✅
+    - Email ✉️
+- TextStyle 📝
+  - MaxLine calculation by height 📏
+- Widget 🧩
+  - Convert Widget to SliverToBoxAdapter ♻️
+```
 
 ## 📦 Dependencies
 
-- mobx: ^2.2.0
+```yaml
+mobx: ^2.2.0
+```
 
 ## 🛠 Setup
 
@@ -32,7 +62,7 @@ To add the package to the Flutter project, add the following lines to your `pubs
 
 ```yaml
 dependencies:
-  flutter_penta_core: ^0.0.5
+  flutter_penta_core: ^0.0.6
 ```
 
 Then run the following command to include the package in your project:
@@ -44,4 +74,4 @@ $ flutter pub get
 
 ## 💻 Author
 
-Anıl Sorgit - [GitHub](https://github.com/ANILSRGT)
+**Anıl Sorgit - [GitHub](https://github.com/ANILSRGT)**

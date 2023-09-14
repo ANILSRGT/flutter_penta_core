@@ -1,6 +1,6 @@
 name: flutter_penta_core
 description: "A core package for flutter projects."
-version: 0.0.5
+version: 0.0.6
 homepage: https://github.com/ANILSRGT/flutter_penta_core
 funding:
   - https://www.buymeacoffee.com/ANILSRGT
@@ -15,6 +15,9 @@ dependencies:
 
   # Used for BaseViewMVVMWithMobx. It is a base class for views.
   mobx: ^2.2.0
+
+  # Used for string_extensions.dart
+  easy_localization: ^3.0.3
 
 dev_dependencies:
   flutter_test:

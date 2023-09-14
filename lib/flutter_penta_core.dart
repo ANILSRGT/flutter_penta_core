@@ -1,5 +1,6 @@
 library flutter_penta_core;
 
-export 'base/index.dart';
-export 'services/index.dart';
-export 'widgets/index.dart';
+export 'base/base.dart';
+export 'services/services.dart';
+export 'widgets/widgets.dart';
+export 'extensions/extensions.dart';

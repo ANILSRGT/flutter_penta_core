@@ -29,11 +29,14 @@ class _ResponsiveWidgetState extends State<ResponsiveWidget> with WidgetsBinding
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
+    if (widget.asToMediaQuery) {
+      WidgetsBinding.instance.addObserver(this);
+    }
   }
 
   @override
   void didChangeMetrics() {
+    if (!mounted) return;
     setState(() {});
   }
 
