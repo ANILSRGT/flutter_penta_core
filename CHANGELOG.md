@@ -31,3 +31,7 @@
 - Fixed Bug: ResponsiveWidget
   - mounted problem fixed.
 - Extensions added. **([ReadMe ➡️ Extension](README.md#-extensions))**
+
+## 0.1.0
+
+- Update CHANGELOG.md from 0.0.6
