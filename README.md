@@ -38,6 +38,13 @@ This Flutter core package contains common codes used in flutter.
   - Icon Size 📐
   - Radius 📏
   - Duration ⏳
+- ✔️ Boolean
+  - xor
+  - xnor
+  - nand
+  - nor
+  - not (getter)
+  - not ~ (operator)
 - String 📝
   - Capitalize 📝
   - Localization 🌐

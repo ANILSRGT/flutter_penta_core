@@ -35,3 +35,13 @@
 ## 0.1.0
 
 - Update CHANGELOG.md from 0.0.6
+
+## 0.1.1
+
+- Added new extension: Boolean **([Extensions](README.md#-extensions))**
+  - xor
+  - xnor
+  - nand
+  - nor
+  - not (getter)
+  - not ~ (operator)
