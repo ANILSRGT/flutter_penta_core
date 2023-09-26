@@ -51,3 +51,8 @@
 - `Penta` prefix added to everything in the package.
   - Example: `BaseView` -> `PentaBaseView`
 - NotFoundPage edited.
+
+## 0.1.3
+
+- Fixed Bug: **([Extensions](README.md#-extensions))** -> dynamicOrientationSize (BuildContext)
+  - Wrong `dynamicOrientationSize` values fixed.

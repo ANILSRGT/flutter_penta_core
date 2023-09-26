@@ -19,21 +19,21 @@ extension PentaContextExtension on BuildContext {
   double dynamicHeight(double value) => height * value;
   double dynamicWidth(double value) => width * value;
 
-  double dynamicOrientationSize(double value) =>
-      dynamicOrientation(dynamicHeight(value), dynamicWidth(value))!;
+  double dynamicOrientationSize(double portraitValue, double landscapeValue) =>
+      dynamicOrientation(dynamicWidth(portraitValue), dynamicHeight(landscapeValue));
   double dynamicOrientationWidth(double portraitValue, double landscapeValue) =>
-      dynamicOrientation(dynamicWidth(portraitValue), dynamicWidth(landscapeValue))!;
+      dynamicOrientation(dynamicWidth(portraitValue), dynamicWidth(landscapeValue));
   double dynamicOrientationHeight(double portraitValue, double landscapeValue) =>
-      dynamicOrientation(dynamicHeight(portraitValue), dynamicHeight(landscapeValue))!;
+      dynamicOrientation(dynamicHeight(portraitValue), dynamicHeight(landscapeValue));
 
   double? staticOrientationWidth(double? portraitValue, double? landscapeValue) =>
       dynamicOrientation(portraitValue, landscapeValue);
   double? staticOrientationHeight(double? portraitValue, double? landscapeValue) =>
       dynamicOrientation(portraitValue, landscapeValue);
 
-  T? dynamicBrightness<T>(T forLight, T forDark) =>
+  T dynamicBrightness<T>(T forLight, T forDark) =>
       brightness == Brightness.light ? forLight : forDark;
-  T? dynamicOrientation<T>(T? forPortrait, T? forLandscape) =>
+  T dynamicOrientation<T>(T forPortrait, T forLandscape) =>
       width > height ? forLandscape : forPortrait;
 
   double dynamicResponsivePerBeetweenSize(double beetween, double increaseAmount) {
@@ -49,28 +49,26 @@ extension ThemeExtension on BuildContext {
 }
 
 extension PaddingExtension on BuildContext {
-  EdgeInsets get paddingLow => EdgeInsets.all(dynamicOrientationSize(0.015));
-  EdgeInsets get paddingMedium => EdgeInsets.all(dynamicOrientationSize(0.025));
-  EdgeInsets get paddingHigh => EdgeInsets.all(dynamicOrientationSize(0.035));
-  EdgeInsets get paddingExtraHigh => EdgeInsets.all(dynamicOrientationSize(0.045));
+  double get _paddingLowValue => dynamicOrientationSize(0.015, 0.01);
+  double get _paddingMediumValue => dynamicOrientationSize(0.025, 0.015);
+  double get _paddingHighValue => dynamicOrientationSize(0.035, 0.02);
+  double get _paddingExtraHighValue => dynamicOrientationSize(0.045, 0.025);
 
-  EdgeInsets get paddingLowVertical =>
-      EdgeInsets.symmetric(vertical: dynamicOrientationSize(0.015));
-  EdgeInsets get paddingMediumVertical =>
-      EdgeInsets.symmetric(vertical: dynamicOrientationSize(0.025));
-  EdgeInsets get paddingHighVertical =>
-      EdgeInsets.symmetric(vertical: dynamicOrientationSize(0.035));
-  EdgeInsets get paddingExtraHighVertical =>
-      EdgeInsets.symmetric(vertical: dynamicOrientationSize(0.045));
+  EdgeInsets get paddingLow => EdgeInsets.all(_paddingLowValue);
+  EdgeInsets get paddingMedium => EdgeInsets.all(_paddingMediumValue);
+  EdgeInsets get paddingHigh => EdgeInsets.all(_paddingHighValue);
+  EdgeInsets get paddingExtraHigh => EdgeInsets.all(_paddingExtraHighValue);
 
-  EdgeInsets get paddingLowHorizontal =>
-      EdgeInsets.symmetric(horizontal: dynamicOrientationSize(0.015));
-  EdgeInsets get paddingMediumHorizontal =>
-      EdgeInsets.symmetric(horizontal: dynamicOrientationSize(0.025));
-  EdgeInsets get paddingHighHorizontal =>
-      EdgeInsets.symmetric(horizontal: dynamicOrientationSize(0.035));
+  EdgeInsets get paddingLowVertical => EdgeInsets.symmetric(vertical: _paddingLowValue);
+  EdgeInsets get paddingMediumVertical => EdgeInsets.symmetric(vertical: _paddingMediumValue);
+  EdgeInsets get paddingHighVertical => EdgeInsets.symmetric(vertical: _paddingHighValue);
+  EdgeInsets get paddingExtraHighVertical => EdgeInsets.symmetric(vertical: _paddingExtraHighValue);
+
+  EdgeInsets get paddingLowHorizontal => EdgeInsets.symmetric(horizontal: _paddingLowValue);
+  EdgeInsets get paddingMediumHorizontal => EdgeInsets.symmetric(horizontal: _paddingMediumValue);
+  EdgeInsets get paddingHighHorizontal => EdgeInsets.symmetric(horizontal: _paddingHighValue);
   EdgeInsets get paddingExtraHighHorizontal =>
-      EdgeInsets.symmetric(horizontal: dynamicOrientationSize(0.045));
+      EdgeInsets.symmetric(horizontal: _paddingExtraHighValue);
 }
 
 extension IconSizeExtension on BuildContext {
@@ -87,10 +85,10 @@ extension RadiusExtension on BuildContext {
   Radius get radiusExtraHigh => const Radius.circular(30);
   Radius get radiusCircular => const Radius.circular(100);
 
-  Radius get radiusResponsiveLow => Radius.circular(dynamicOrientationSize(0.01));
-  Radius get radiusResponsiveMedium => Radius.circular(dynamicOrientationSize(0.015));
-  Radius get radiusResponsiveHigh => Radius.circular(dynamicOrientationSize(0.02));
-  Radius get radiusResponsiveExtraHigh => Radius.circular(dynamicOrientationSize(0.03));
+  Radius get radiusResponsiveLow => Radius.circular(dynamicOrientationSize(0.01, 0.005));
+  Radius get radiusResponsiveMedium => Radius.circular(dynamicOrientationSize(0.015, 0.01));
+  Radius get radiusResponsiveHigh => Radius.circular(dynamicOrientationSize(0.02, 0.015));
+  Radius get radiusResponsiveExtraHigh => Radius.circular(dynamicOrientationSize(0.03, 0.02));
 }
 
 extension DurationExtension on BuildContext {
