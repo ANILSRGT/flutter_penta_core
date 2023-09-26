@@ -1,4 +1,4 @@
-enum ResponsiveSize {
+enum PentaResponsiveSize {
   sm(640),
   md(768),
   lg(1024),
@@ -6,5 +6,5 @@ enum ResponsiveSize {
   xxl(1536);
 
   final int defaultBreakpointValue;
-  const ResponsiveSize(this.defaultBreakpointValue);
+  const PentaResponsiveSize(this.defaultBreakpointValue);
 }

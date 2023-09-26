@@ -1,6 +1,6 @@
 part of 'extensions.dart';
 
-extension StringExtension on String {
+extension PentaStringExtension on String {
   String get capatalize => this[0].toUpperCase() + substring(1);
   String get unCapatalize => this[0].toLowerCase() + substring(1);
 

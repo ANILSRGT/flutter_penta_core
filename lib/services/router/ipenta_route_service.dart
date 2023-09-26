@@ -1,4 +1,4 @@
-abstract interface class IRouteService {
+abstract interface class IPentaRouteService {
   void pushNamed(String routeName, {Object? arguments});
   void pushReplacementNamed(String routeName, {Object? arguments});
   void popUntil(String routeName);

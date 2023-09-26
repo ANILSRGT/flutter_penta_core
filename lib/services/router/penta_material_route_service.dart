@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'iroute_service.dart';
+import 'ipenta_route_service.dart';
 
-class MaterialRouteService implements IRouteService {
+class PentaMaterialRouteService implements IPentaRouteService {
   final GlobalKey<NavigatorState> navigatorKey;
-  const MaterialRouteService(this.navigatorKey);
+  const PentaMaterialRouteService(this.navigatorKey);
 
   @override
   void pop() {

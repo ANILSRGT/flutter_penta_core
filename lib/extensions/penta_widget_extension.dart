@@ -1,5 +1,5 @@
 part of 'extensions.dart';
 
-extension WidgetExtension on Widget {
+extension PentaWidgetExtension on Widget {
   SliverToBoxAdapter get toSliverToBoxAdapter => SliverToBoxAdapter(child: this);
 }

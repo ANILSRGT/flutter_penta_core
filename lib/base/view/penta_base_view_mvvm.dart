@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class BaseViewMVVM<T> extends StatefulWidget {
-  const BaseViewMVVM({
+class PentaBaseViewMVVM<T> extends StatefulWidget {
+  const PentaBaseViewMVVM({
     Key? key,
     required this.viewModel,
     required this.onPageBuilder,
@@ -14,10 +14,10 @@ class BaseViewMVVM<T> extends StatefulWidget {
   final VoidCallback? onDispose;
 
   @override
-  State createState() => _BaseViewMVVMState<T>();
+  State createState() => _PentaBaseViewMVVMState<T>();
 }
 
-class _BaseViewMVVMState<T> extends State<BaseViewMVVM<T>> {
+class _PentaBaseViewMVVMState<T> extends State<PentaBaseViewMVVM<T>> {
   late T model;
   @override
   void initState() {

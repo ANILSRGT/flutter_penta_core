@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'responsive.dart';
+import 'penta_responsive.dart';
 
-class ResponsiveWidget extends StatefulWidget {
+class PentaResponsiveWidget extends StatefulWidget {
   final Widget normal;
   final Widget? sm;
   final Widget? md;
@@ -10,7 +10,7 @@ class ResponsiveWidget extends StatefulWidget {
   final Widget? xl;
   final Widget? xxl;
   final bool asToMediaQuery;
-  const ResponsiveWidget({
+  const PentaResponsiveWidget({
     super.key,
     required this.normal,
     this.sm,
@@ -22,10 +22,10 @@ class ResponsiveWidget extends StatefulWidget {
   });
 
   @override
-  State<ResponsiveWidget> createState() => _ResponsiveWidgetState();
+  State<PentaResponsiveWidget> createState() => _PentaResponsiveWidgetState();
 }
 
-class _ResponsiveWidgetState extends State<ResponsiveWidget> with WidgetsBindingObserver {
+class _PentaResponsiveWidgetState extends State<PentaResponsiveWidget> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
@@ -43,7 +43,7 @@ class _ResponsiveWidgetState extends State<ResponsiveWidget> with WidgetsBinding
   @override
   Widget build(BuildContext context) {
     if (widget.asToMediaQuery) {
-      return Responsive.withPlatformSize(
+      return PentaResponsive.withPlatformSize(
         normal: widget.normal,
         sm: widget.sm,
         md: widget.md,
@@ -55,7 +55,7 @@ class _ResponsiveWidgetState extends State<ResponsiveWidget> with WidgetsBinding
 
     return LayoutBuilder(
       builder: (ctx, constraints) {
-        return Responsive.withSize(
+        return PentaResponsive.withSize(
           constraints.biggest,
           normal: widget.normal,
           sm: widget.sm,

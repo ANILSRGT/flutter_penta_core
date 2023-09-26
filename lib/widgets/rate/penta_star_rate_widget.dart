@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class StarRateWidget extends StatelessWidget {
+class PentaStarRateWidget extends StatelessWidget {
   final int starCount;
   final double rating;
   final Color ratedColor;
   final Color unRatedColor;
   final double size;
   final double spacing;
-  const StarRateWidget({
+  const PentaStarRateWidget({
     super.key,
     this.starCount = 5,
     this.rating = 0,

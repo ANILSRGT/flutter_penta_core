@@ -1,6 +1,6 @@
 name: flutter_penta_core
 description: "A core package for flutter projects."
-version: 0.1.1
+version: 0.1.2
 homepage: https://github.com/ANILSRGT/flutter_penta_core
 funding:
   - https://www.buymeacoffee.com/ANILSRGT
@@ -23,6 +23,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^2.0.0
+  flutter_lints: ^2.0.3
 
 flutter:

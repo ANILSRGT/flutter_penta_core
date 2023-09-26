@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../state/base_state.dart';
+import '../state/penta_base_state.dart';
 
-class BaseView extends StatefulWidget {
-  const BaseView({
+class PentaBaseView extends StatefulWidget {
+  const PentaBaseView({
     Key? key,
     required this.init,
     required this.onPageBuilder,
@@ -14,10 +14,10 @@ class BaseView extends StatefulWidget {
   final VoidCallback? onDispose;
 
   @override
-  State createState() => _BaseViewState();
+  State createState() => _PentaBaseViewState();
 }
 
-class _BaseViewState extends BaseState<BaseView> {
+class _PentaBaseViewState extends PentaBaseState<PentaBaseView> {
   @override
   void initState() {
     if (widget.init != null) widget.init?.call();

@@ -45,3 +45,9 @@
   - nor
   - not (getter)
   - not ~ (operator)
+
+## 0.1.2
+
+- `Penta` prefix added to everything in the package.
+  - Example: `BaseView` -> `PentaBaseView`
+- NotFoundPage edited.

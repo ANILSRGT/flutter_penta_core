@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 
-class NotFoundPage extends StatelessWidget {
+class PentaNotFoundPage extends StatelessWidget {
   final PreferredSizeWidget? appBar;
   final Widget? goBackWidget;
+  final String notFoundText;
   final VoidCallback? goBack;
-  const NotFoundPage({super.key, this.appBar, this.goBackWidget, this.goBack});
+  const PentaNotFoundPage({
+    super.key,
+    this.appBar,
+    this.goBackWidget,
+    this.goBack,
+    this.notFoundText = 'Not Found',
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,16 +22,16 @@ class NotFoundPage extends StatelessWidget {
           child: Column(
             children: [
               RichText(
-                text: const TextSpan(
+                text: TextSpan(
                   text: '404',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 50,
                     fontWeight: FontWeight.bold,
                   ),
                   children: [
                     TextSpan(
-                      text: ' Not Found',
-                      style: TextStyle(
+                      text: ' $notFoundText',
+                      style: const TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.normal,
                       ),

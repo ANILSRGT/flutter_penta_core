@@ -1,25 +1,25 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'responsive_size.dart';
+import 'penta_responsive_size.dart';
 
-class Responsive extends StatelessWidget {
-  final Map<ResponsiveSize, int> breakPoints;
+class PentaResponsive extends StatelessWidget {
+  final Map<PentaResponsiveSize, int> breakPoints;
   final Widget child;
 
-  static final Map<ResponsiveSize, int> _breakPoints = {
-    ResponsiveSize.sm: ResponsiveSize.sm.defaultBreakpointValue,
-    ResponsiveSize.md: ResponsiveSize.md.defaultBreakpointValue,
-    ResponsiveSize.lg: ResponsiveSize.lg.defaultBreakpointValue,
-    ResponsiveSize.xl: ResponsiveSize.xl.defaultBreakpointValue,
-    ResponsiveSize.xxl: ResponsiveSize.xxl.defaultBreakpointValue,
+  static final Map<PentaResponsiveSize, int> _breakPoints = {
+    PentaResponsiveSize.sm: PentaResponsiveSize.sm.defaultBreakpointValue,
+    PentaResponsiveSize.md: PentaResponsiveSize.md.defaultBreakpointValue,
+    PentaResponsiveSize.lg: PentaResponsiveSize.lg.defaultBreakpointValue,
+    PentaResponsiveSize.xl: PentaResponsiveSize.xl.defaultBreakpointValue,
+    PentaResponsiveSize.xxl: PentaResponsiveSize.xxl.defaultBreakpointValue,
   };
 
-  static int get smPoint => _breakPoints[ResponsiveSize.sm]!;
-  static int get mdPoint => _breakPoints[ResponsiveSize.md]!;
-  static int get lgPoint => _breakPoints[ResponsiveSize.lg]!;
-  static int get xlPoint => _breakPoints[ResponsiveSize.xl]!;
-  static int get xxlPoint => _breakPoints[ResponsiveSize.xxl]!;
+  static int get smPoint => _breakPoints[PentaResponsiveSize.sm]!;
+  static int get mdPoint => _breakPoints[PentaResponsiveSize.md]!;
+  static int get lgPoint => _breakPoints[PentaResponsiveSize.lg]!;
+  static int get xlPoint => _breakPoints[PentaResponsiveSize.xl]!;
+  static int get xxlPoint => _breakPoints[PentaResponsiveSize.xxl]!;
 
   static T withSize<T>(
     Size size, {
@@ -65,7 +65,7 @@ class Responsive extends StatelessWidget {
     );
   }
 
-  const Responsive({
+  const PentaResponsive({
     Key? key,
     required this.breakPoints,
     required this.child,
