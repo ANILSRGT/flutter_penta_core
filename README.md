@@ -69,7 +69,8 @@ To add the package to the Flutter project, add the following lines to your `pubs
 
 ```yaml
 dependencies:
-  flutter_penta_core: ^0.1.3
+  flutter_penta_core:
+    git: https://github.com/ANILSRGT/flutter_penta_core.git
 ```
 
 Then run the following command to include the package in your project:
