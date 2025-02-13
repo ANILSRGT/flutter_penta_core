@@ -3271,6 +3271,6 @@ final class EmailValidationConstants {
     'zslsz.com',
     'fitwl.com',
     'frederictonlawyer.com',
-    'gufum.com'
+    'gufum.com',
   ];
 }

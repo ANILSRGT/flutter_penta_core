@@ -2,6 +2,7 @@ import 'package:intl/intl.dart';
 
 part 'calc_date_time_ext.dart';
 part 'converter_date_time_ext.dart';
+part 'compare_date_time_ext.dart';
 
 extension DateTimeExt on DateTime {
   _DateTimeExt get ext => _DateTimeExt(this);
@@ -14,4 +15,5 @@ final class _DateTimeExt {
 
   _CalcDateTimeExt get calc => _CalcDateTimeExt(_value);
   _ConverterDateTimeExt get converter => _ConverterDateTimeExt(_value);
+  _CompareDateTimeExt get compare => _CompareDateTimeExt(_value);
 }
