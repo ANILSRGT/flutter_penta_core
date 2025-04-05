@@ -1,0 +1,31 @@
+name: penta_core
+description: "A new Flutter package project."
+version: 1.0.0
+
+environment:
+  sdk: ^3.7.0
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Used for check the internet connection
+  internet_connection_checker: ^3.0.1
+  intl: ^0.20.2
+  path: ^1.9.1
+  source_gen: ^2.0.0
+  build: ^2.4.2
+  ansicolor: ^2.0.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  very_good_analysis: ^7.0.0
+  build_runner: ^2.4.15
+
+flutter:
+  uses-material-design: true
+
+executables:
+  lang_generator: bin/lang_generator.dart
