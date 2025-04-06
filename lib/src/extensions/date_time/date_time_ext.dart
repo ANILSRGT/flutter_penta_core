@@ -1,7 +1,7 @@
 import 'package:intl/intl.dart';
 
 part 'calc_date_time_ext.dart';
-part 'converter_date_time_ext.dart';
+part 'format_date_time_ext.dart';
 part 'compare_date_time_ext.dart';
 
 extension DateTimeExt on DateTime {

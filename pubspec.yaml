@@ -1,6 +1,6 @@
 name: penta_core
 description: "A new Flutter package project."
-version: 1.0.0
+version: 1.0.1
 
 environment:
   sdk: ^3.7.0
