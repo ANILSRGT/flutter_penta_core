@@ -24,8 +24,10 @@ final class _ConverterDateTimeExt {
     if (_value == null) return '';
 
     final now = DateTime.now().toUtc();
+    final utcValue = _value.toUtc();
+    final diff = utcValue.difference(now);
 
-    return _value.toUtc().ext.compare.isSameDay(now)
+    return _value.toUtc().ext.compare.isSameDay(now) && diff.inHours > 0
         ? 'Today'
         : _value.toUtc().ext.compare.isSameDay(now.ext.calc.plus(day: 1))
         ? 'Tomorrow'
