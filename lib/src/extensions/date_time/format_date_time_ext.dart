@@ -20,6 +20,21 @@ final class _ConverterDateTimeExt {
         : '${diff.inSeconds}s';
   }
 
+  String get timeWhen {
+    if (_value == null) return '';
+
+    final now = DateTime.now();
+    final diff = _value.difference(now);
+
+    return diff.inDays > 1
+        ? DateFormat('dd/MM/yyyy').format(_value)
+        : diff.inDays == 1
+        ? 'Tomorrow'
+        : diff.inDays == 0
+        ? 'Today'
+        : 'Past';
+  }
+
   /// Formats the date to a string using the provided format and locale.
   /// <br/>If no format is provided, it defaults to `dd/MM/yyyy`.
   /// <br/>If no locale is provided, it defaults to `en_US`.
