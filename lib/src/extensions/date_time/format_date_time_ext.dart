@@ -8,8 +8,8 @@ final class _ConverterDateTimeExt {
   String get timeAgo {
     if (_value == null) return '';
 
-    final now = DateTime.now();
-    final diff = now.difference(_value);
+    final now = DateTime.now().toUtc();
+    final diff = now.difference(_value.toUtc());
 
     return diff.inDays > 0
         ? DateFormat('dd/MM/yyyy').format(_value)
@@ -23,15 +23,14 @@ final class _ConverterDateTimeExt {
   String get timeWhen {
     if (_value == null) return '';
 
-    final now = DateTime.now();
-    final diff = _value.difference(now);
+    final now = DateTime.now().toUtc();
 
-    return diff.inDays > 1
-        ? DateFormat('dd/MM/yyyy').format(_value)
-        : diff.inDays == 1
-        ? 'Tomorrow'
-        : diff.inDays == 0
+    return _value.toUtc().ext.compare.isSameDay(now)
         ? 'Today'
+        : _value.toUtc().ext.compare.isSameDay(now.ext.calc.plus(day: 1))
+        ? 'Tomorrow'
+        : _value.toUtc().difference(now).inDays > 0
+        ? DateFormat('dd/MM/yyyy').format(_value)
         : 'Past';
   }
 
