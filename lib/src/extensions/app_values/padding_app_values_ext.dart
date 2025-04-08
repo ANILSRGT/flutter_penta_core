@@ -7,7 +7,7 @@ final class _PaddingAppValuesExt {
 
   EdgeInsets get all => EdgeInsets.all(_value.value);
   EdgeInsets get horizontal => EdgeInsets.symmetric(horizontal: _value.value);
-  EdgeInsets get vertical => EdgeInsets.symmetric(horizontal: _value.value);
+  EdgeInsets get vertical => EdgeInsets.symmetric(vertical: _value.value);
   _PaddingAppValuesDirectionalExt get directional =>
       _PaddingAppValuesDirectionalExt(_value);
 }
