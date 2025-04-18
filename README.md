@@ -10,6 +10,8 @@ Flutter Penta Core is a modular and extensible core library for Flutter applicat
 - **Mixins**: Mixins for widget and data management.
 - **Managers**: Managers for application-wide features like locale management.
 - **Models**: Models for response and error handling.
+- **Utilities**: Utility classes for common tasks.
+- **Constants**: Constants for easy access to frequently used values.
 
 ## Installation
 
@@ -17,12 +19,7 @@ Flutter Penta Core is a modular and extensible core library for Flutter applicat
 
 ```yaml
 dependencies:
-  flutter_penta_core:
-  path: ./modules/flutter_penta_core
-  ref: main # latest version
-  # or
-  # ref: version_number
-  # example => ref: v1.0.0
+  flutter_penta_core: ^1.0.2
 ```
 
 2. Run the following command to fetch the packages:
