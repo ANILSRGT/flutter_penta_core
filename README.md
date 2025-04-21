@@ -19,7 +19,7 @@ Flutter Penta Core is a modular and extensible core library for Flutter applicat
 
 ```yaml
 dependencies:
-  penta_core: ^1.0.2
+  penta_core: ^1.0.2+1
 ```
 
 2. Run the following command to fetch the packages:
