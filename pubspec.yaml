@@ -30,4 +30,4 @@ flutter:
   uses-material-design: true
 
 executables:
-  lang_generator: bin/lang_generator.dart
+  lang_generator: lang_generator
