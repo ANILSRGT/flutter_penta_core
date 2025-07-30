@@ -28,7 +28,7 @@ final class LoadingCallbackDialog {
             context: context,
             builder: (context) {
               return PopScope(
-                canPop: false,
+                canPop: cancelable,
                 child:
                     customLoading ??
                     Center(

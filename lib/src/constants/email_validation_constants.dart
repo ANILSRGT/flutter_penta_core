@@ -1,9 +1,12 @@
 final class EmailValidationConstants {
   const EmailValidationConstants._();
 
-  static bool validEmailByDomain(String email) {
+  static bool validEmailByDomain(
+    String email, {
+    List<String>? domainWhiteList,
+  }) {
     final domain = email.split('@').last;
-    return !domains.contains(domain);
+    return domainWhiteList?.contains(domain) ?? !domains.contains(domain);
   }
 
   static const domains = <String>[

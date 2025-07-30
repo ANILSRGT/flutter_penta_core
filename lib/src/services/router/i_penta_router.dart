@@ -1,4 +1,4 @@
-abstract interface class IRouter<TPath extends Enum> {
+abstract interface class IPentaRouter<TPath extends Enum> {
   Future<T?> goTo<T extends Object, P extends Object>(
     TPath route, {
     P? arguments,

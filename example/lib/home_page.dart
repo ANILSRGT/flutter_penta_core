@@ -17,11 +17,11 @@ class HomePage extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 final newLocale =
-                    context.localeManagerNotifierRead().currentLocale ==
+                    context.localeManagerNotifierRead.currentLocale ==
                             AppLocale.en
                         ? AppLocale.tr
                         : AppLocale.en;
-                context.localeManagerNotifierRead().changeLocale(newLocale);
+                context.localeManagerNotifierRead.changeLocale(newLocale);
               },
               child: Text(LocaleKeys.changeLanguage.translate(context)),
             ),

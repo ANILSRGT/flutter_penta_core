@@ -1,1 +1,1 @@
-export 'i_router.dart';
+export 'i_penta_router.dart';

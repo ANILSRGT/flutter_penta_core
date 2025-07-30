@@ -8,7 +8,6 @@ export 'iterable/iterable_ext.dart';
 export 'list/list_ext.dart';
 export 'map/map_ext.dart';
 export 'number/number_ext.dart';
-export 'object/object_ext.dart';
 export 'string/string_ext.dart';
 export 'uint8list/uint8list_ext.dart';
 export 'widget/widget_ext.dart';
