@@ -5,8 +5,7 @@ A comprehensive Flutter package that provides a rich set of utilities, widgets, 
 ## 📦 Package Information
 
 - **Package Name**: `penta_core`
-- **Version**: 1.0.3
-- **SDK Requirements**: Flutter >=1.17.0, Dart ^3.7.0
+- **Version**: 1.2.0
 - **Repository**: [GitHub](https://github.com/ANILSRGT/flutter_penta_core)
 
 ## 🚀 Features
@@ -17,39 +16,52 @@ A comprehensive Flutter package that provides a rich set of utilities, widgets, 
 - **Multi-language Support**: Built-in support for 25+ languages in phone field widget
 
 ### 🎨 **Widgets**
-- **Phone Field**: International phone number input with country selection
-- **Responsive Layout**: Adaptive and responsive design widgets
-- **Text Widgets**: Enhanced text widgets with underline support
-- **Layout Widgets**: Padding, SizedBox, and layout management widgets
+- **Field Widgets**: International phone number input with country selection, supporting 25+ languages with customizable UI, validation, and country code detection
+- **Layout Widgets**: Adaptive and responsive design widgets that automatically adjust to different screen sizes and platforms (mobile, desktop, web), plus padding management utilities
+- **Text Widgets**: Enhanced text widgets with customizable underline support, clickable text spans, and rich text formatting
+- **SizedBox Widgets**: Gap widgets for flexible spacing and layout management with customizable dimensions and colors
+- **Toast Widgets**: Toast notifications with customizable positioning, animations, and styling for user feedback
+- **Overlay Widgets**: Showcase widgets for user onboarding, feature highlighting, and interactive overlays
+- **Painter Widgets**: Custom drawing widgets including arrow painters for connecting UI elements with arrows  
 
 ### 🔧 **Extensions**
-- **String Extensions**: Validation, conversion, and random string generation
-- **DateTime Extensions**: Formatting, calculation, and comparison utilities
-- **List & Map Extensions**: Sorting, filtering, and manipulation helpers
-- **Color Extensions**: Material color and color manipulation utilities
-- **Context Extensions**: Screen, theme, and widget context helpers
-- **Number Extensions**: Math operations and conversions
-- **Widget Extensions**: Sliver and widget manipulation utilities
+- **String Extensions**: Validation, conversion, random string generation, and text manipulation utilities
+- **DateTime Extensions**: Formatting, calculation, comparison utilities, and time-based operations
+- **List Extensions**: Sorting, filtering, manipulation helpers, and collection operations
+- **Map Extensions**: Key-value pair manipulation, filtering, and transformation utilities
+- **Iterable Extensions**: Generic collection operations, filtering, and iteration helpers
+- **Int Extensions**: Mathematical calculations, digit counting, and number formatting
+- **Number Extensions**: Math operations, linear interpolation, and numerical conversions
+- **Bool Extensions**: Boolean operations, conditional logic, and type conversions
+- **Color Extensions**: Material color utilities, color manipulation, and theme integration
+- **Context Extensions**: Screen dimensions, theme access, locale management, and widget context helpers
+- **Widget Extensions**: Sliver widgets, widget manipulation, and UI component utilities
+- **Uint8List Extensions**: Byte array conversion, encoding/decoding, and binary data manipulation
+- **App Values Extensions**: Centralized app constants, padding, radius, and size value management
 
 ### 🛠 **Services & Utilities**
-- **Cache Service**: Interface for caching operations
-- **Router Service**: Navigation and routing interface
-- **Connectivity Service**: Internet connection checking
-- **Event Bus**: Application-wide event management
-- **Debouncer**: Input debouncing utilities
-- **Loading Dialog**: Callback-based loading dialogs
+- **Cache Service**: Interface for caching operations and data persistence
+- **Router Service**: Navigation and routing interface for app navigation
+- **Connectivity Service**: Internet connection checking and network status monitoring
+- **Event Bus**: Application-wide event management and communication system
+- **Debouncer**: Input debouncing utilities for search, API calls, and user interactions
+- **Loading Dialog**: Callback-based loading dialogs with async operation handling
+- **Firebase Exception Converter**: Multi-language Firebase error message conversion and localization
+- **Image String Converter**: Universal image provider creation from URLs, assets, files, and base64 data
+- **Timestamp Converter**: DateTime and timestamp conversion utilities for local and UTC time handling
 
 ### 📱 **Models & Mixins**
-- **Response Models**: Standardized API response handling
-- **Error Models**: Error handling and management
-- **Use Case Models**: Clean architecture use case patterns
-- **State Mixins**: Safe state management for widgets
-- **Repository Mixins**: Data repository patterns
+- **Response Models**: Standardized API response handling and data structure management
+- **Error Models**: Error handling, management, and error state representation
+- **Use Case Models**: Clean architecture use case patterns with various parameter and response combinations
+- **Object Models**: Base model classes with ID support and common object operations
+- **Material Models**: Material Design color and theme model implementations
+- **State Mixins**: Safe state management for widgets with lifecycle handling
+- **Repository Mixins**: Data repository patterns and data access layer abstractions
 
 ### 🎯 **Constants & Values**
 - **App Values**: Centralized application constants
 - **Email Validation**: Email validation constants
-- **Padding & Radius**: Consistent spacing values
 
 ## 📥 Installation
 
@@ -57,7 +69,7 @@ Add the following to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  penta_core: ^1.0.3
+  penta_core: ^1.2.0
 ```
 
 Then run:
@@ -220,22 +232,6 @@ Color backgroundColor = context.ext.theme.convertByBrightness(
 // Locale management
 context.localeManagerNotifierRead.changeLocale(AppLocale.tr);
 String translated = LocaleKeys.hello.translate(context);
-```
-
-### Responsive Widgets
-
-```dart
-PentaResponsiveWidget(
-  mobile: Container(color: Colors.blue),
-  tablet: Container(color: Colors.green),
-  desktop: Container(color: Colors.red),
-)
-
-PentaAdaptiveWidget(
-  android: AndroidWidget(),
-  ios: IOSWidget(),
-  web: WebWidget(),
-)
 ```
 
 ### Utilities

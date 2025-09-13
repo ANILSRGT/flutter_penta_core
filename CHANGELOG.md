@@ -5,7 +5,13 @@ All notable changes to the Flutter Penta Core package will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.1.0] - 2025-01-XX
+## [1.2.0]
+
+### 🚀 Major Features
+- **Penta Toast**: Toast notification widget for displaying brief messages to users.
+- **Showcase Tutorial Widget**: Widget for creating interactive onboarding tutorials and feature highlights.
+
+## [1.1.0]
 
 ### 🚀 Major Features
 
@@ -43,12 +49,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated pubspec.yaml with improved dependencies
 - Enhanced example application with phone field demonstration
 
-## [1.0.2+1] - 2025-04-21
+## [1.0.2+1]
 
 ### 🔧 Bug Fixes
 - Fixed version number consistency in pubspec.yaml and CHANGELOG.md
 
-## [1.0.2] - 2025-04-21
+## [1.0.2]
 
 ### 🚀 Initial Release
 
