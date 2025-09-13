@@ -1,10 +1,11 @@
 import 'package:example/locale_keys.g.dart';
-import 'package:example/main.dart';
 import 'package:flutter/material.dart';
 import 'package:penta_core/penta_core.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+enum AppLocale { en, tr }
+
+class LocalizationExamplePage extends StatelessWidget {
+  const LocalizationExamplePage({super.key});
 
   @override
   Widget build(BuildContext context) {

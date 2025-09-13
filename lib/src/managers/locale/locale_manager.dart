@@ -32,10 +32,12 @@ class LocaleManager<T extends Enum> {
         final jsonString = await rootBundle.loadString(filePath);
         final jsonMap = jsonDecode(jsonString) as Map<String, dynamic>;
         _localizedStrings[locale] = _flattenJson(jsonMap);
-      } catch (e) {
-        throw FlutterError(
-          'Failed to load localization file: $filePath. Error: $e',
+      } on Exception catch (e) {
+        debugPrint(
+          'Warning: Failed to load localization file: $filePath. Error: $e',
         );
+        // Fallback olarak boş map kullan
+        _localizedStrings[locale] = {};
       }
     }
   }
