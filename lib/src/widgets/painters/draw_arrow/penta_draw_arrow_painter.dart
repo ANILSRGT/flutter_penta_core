@@ -59,7 +59,7 @@ class _PentaDrawArrowPainter extends CustomPainter {
   }
 
   double _drawArrowLine(Canvas canvas, Offset start, Offset end, Paint paint) {
-    const int steps = 100;
+    const steps = 100;
     final curveValues = List.generate(
       steps,
       (i) => arrowConfig.curve.transform(i / (steps - 1)),
