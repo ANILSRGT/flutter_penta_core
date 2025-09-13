@@ -1,5 +1,6 @@
 import 'package:example/localization_example_page.dart';
 import 'package:example/phone_field_example_page.dart';
+import 'package:example/showcase_example_page.dart';
 import 'package:example/toast_example_page.dart';
 import 'package:flutter/material.dart';
 import 'package:penta_core/penta_core.dart';
@@ -24,6 +25,7 @@ class _MyApp extends StatelessWidget {
     (ToastExamplePage(), 'Toast Example'),
     (PhoneFieldExamplePage(), 'Phone Field Example'),
     (LocalizationExamplePage(), 'Localization Example'),
+    (ShowcaseExamplePage(), 'Showcase Example'),
   ];
 
   @override
