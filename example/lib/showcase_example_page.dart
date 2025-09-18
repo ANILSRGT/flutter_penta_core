@@ -68,7 +68,6 @@ class _ShowcaseExamplePageState extends State<ShowcaseExamplePage> {
         showcaseOpen: showcaseOpen,
         layerLink: layerLink,
         showcaseKey: showcaseKey,
-        showcaseChild: highlightButton,
         infoAlign: Alignment(-0.4, 0),
         onBarrierTap: toggleShowcase,
         updateEventBus: updateEventBus,

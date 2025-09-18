@@ -1,13 +1,12 @@
 part of 'penta_showcase.dart';
 
-class PentaShowcaseOverlayWrapper extends StatelessWidget {
+class PentaShowcaseOverlayWrapper extends StatefulWidget {
   PentaShowcaseOverlayWrapper({
     required this.child,
     required this.infoChild,
     required this.showcaseOpen,
     required this.layerLink,
     required this.showcaseKey,
-    required this.showcaseChild,
     required this.infoAlign,
     super.key,
     this.onBarrierTap,
@@ -20,7 +19,6 @@ class PentaShowcaseOverlayWrapper extends StatelessWidget {
   final bool showcaseOpen;
   final LayerLink layerLink;
   final GlobalKey showcaseKey;
-  final Widget showcaseChild;
   final Alignment infoAlign;
   final VoidCallback? onBarrierTap;
   final GlobalKey infoKey;
@@ -28,45 +26,75 @@ class PentaShowcaseOverlayWrapper extends StatelessWidget {
   final PentaEventBus<void>? updateEventBus;
 
   @override
+  State<PentaShowcaseOverlayWrapper> createState() =>
+      _PentaShowcaseOverlayWrapperState();
+}
+
+class _PentaShowcaseOverlayWrapperState
+    extends State<PentaShowcaseOverlayWrapper> {
+  Widget? showcaseWidget;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showcaseWidget = _getShowcaseWidget();
+      setState(() {});
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Positioned.fill(child: child),
+        Positioned.fill(child: widget.child),
 
-        if (showcaseOpen) ...[
+        if (widget.showcaseOpen) ...[
           GestureDetector(
             behavior: HitTestBehavior.translucent,
-            onTap: onBarrierTap,
+            onTap: widget.onBarrierTap,
             child: Container(
               color: Colors.black.withValues(alpha: 0.7),
             ),
           ),
-          if (arrowConfig.visible)
+          if (widget.arrowConfig.visible)
             Positioned.fill(
               child: PentaDrawArrowCustomPaint(
-                fromWidgetKey: showcaseKey,
-                toWidgetKey: infoKey,
-                arrowConfig: arrowConfig,
-                updateEventBus: updateEventBus,
+                fromWidgetKey: widget.showcaseKey,
+                toWidgetKey: widget.infoKey,
+                arrowConfig: widget.arrowConfig,
+                updateEventBus: widget.updateEventBus,
               ),
             ),
 
           SafeArea(
             child: Align(
-              alignment: infoAlign,
+              alignment: widget.infoAlign,
               child: KeyedSubtree(
-                key: infoKey,
-                child: infoChild,
+                key: widget.infoKey,
+                child: widget.infoChild,
               ),
             ),
           ),
 
-          CompositedTransformFollower(
-            link: layerLink,
-            child: showcaseChild,
-          ),
+          if (showcaseWidget != null)
+            CompositedTransformFollower(
+              link: widget.layerLink,
+              child: showcaseWidget,
+            ),
         ],
       ],
     );
+  }
+
+  /// GlobalKey'den PentaShowcase widget'ına ulaşıp showcaseWidget'ı döndürür
+  Widget? _getShowcaseWidget() {
+    final context = widget.showcaseKey.currentContext;
+    if (context == null) return null;
+
+    final state = context.findAncestorWidgetOfExactType<PentaShowcase>();
+    if (state == null) return null;
+
+    return state.showcaseWidget;
   }
 }
