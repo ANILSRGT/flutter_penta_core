@@ -7,19 +7,19 @@ class PentaShowcase extends StatelessWidget {
   const PentaShowcase({
     required this.widget,
     required this.showcaseWidget,
-    required this.showcaseOpen,
     required this.layerLink,
     required this.showcaseKey,
+    required this.showcaseOpen,
     super.key,
     this.arrowConfig = const PentaDrawArrowConfig(),
   });
 
   final Widget widget;
   final Widget showcaseWidget;
-  final bool showcaseOpen;
   final LayerLink layerLink;
   final GlobalKey showcaseKey;
   final PentaDrawArrowConfig arrowConfig;
+  final bool showcaseOpen;
 
   @override
   Widget build(BuildContext context) {

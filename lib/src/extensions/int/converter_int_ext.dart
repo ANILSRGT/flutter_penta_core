@@ -1,9 +1,7 @@
 part of 'int_ext.dart';
 
-final class _ConverterIntExt {
-  const _ConverterIntExt(int? value) : _value = value;
-
-  final int? _value;
+mixin _ConverterIntExt {
+  int get _value;
 
   String formatShort({Locale? locale}) {
     final suffixesLocale = <String, List<String>>{
@@ -16,7 +14,7 @@ final class _ConverterIntExt {
     final suffixes = suffixesLocale[langCode]!;
 
     var index = 0;
-    var num = _value ?? 0.0;
+    var num = _value.toDouble();
 
     while (num >= 1000 && index < suffixes.length - 1) {
       num /= 1000;

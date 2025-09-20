@@ -1,13 +1,12 @@
 part 'math_number_ext.dart';
 
-extension NumberExt on num? {
+extension NumberExt on num {
   _NumberExt get ext => _NumberExt(this);
 }
 
-final class _NumberExt {
-  const _NumberExt(num? value) : _value = value;
+final class _NumberExt with _NumberMathExt {
+  const _NumberExt(num value) : _value = value;
 
-  final num? _value;
-
-  _NumberMathExt get math => _NumberMathExt(_value);
+  @override
+  final num _value;
 }

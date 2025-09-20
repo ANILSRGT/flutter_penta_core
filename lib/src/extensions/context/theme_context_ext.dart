@@ -1,8 +1,7 @@
 part of 'context_ext.dart';
 
-final class _ThemeContextExt {
-  const _ThemeContextExt(BuildContext context) : _context = context;
-  final BuildContext _context;
+mixin _ThemeContextExt {
+  BuildContext get _context;
 
   ThemeData get theme => Theme.of(_context);
   TextTheme get textTheme => theme.textTheme;
@@ -14,6 +13,5 @@ final class _ThemeContextExt {
   T convertByBrightness<T>({
     required T light,
     required T dark,
-  }) =>
-      isLight ? light : dark;
+  }) => isLight ? light : dark;
 }

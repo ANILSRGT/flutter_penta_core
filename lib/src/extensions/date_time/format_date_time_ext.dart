@@ -1,13 +1,9 @@
 part of 'date_time_ext.dart';
 
-final class _ConverterDateTimeExt {
-  const _ConverterDateTimeExt(DateTime? value) : _value = value;
-
-  final DateTime? _value;
+mixin _ConverterDateTimeExt {
+  DateTime get _value;
 
   String get timeAgo {
-    if (_value == null) return '';
-
     final now = DateTime.now().toUtc();
     final diff = now.difference(_value.toUtc());
 
@@ -21,15 +17,13 @@ final class _ConverterDateTimeExt {
   }
 
   String get timeWhen {
-    if (_value == null) return '';
-
     final now = DateTime.now().toUtc();
     final utcValue = _value.toUtc();
     final diff = utcValue.difference(now);
 
-    return _value.toUtc().ext.compare.isSameDay(now) && diff.inMicroseconds > 0
+    return _value.toUtc().ext.isSameDay(now) && diff.inMicroseconds > 0
         ? 'Today'
-        : _value.toUtc().ext.compare.isSameDay(now.ext.calc.plus(day: 1))
+        : _value.toUtc().ext.isSameDay(now.ext.plus(day: 1))
         ? 'Tomorrow'
         : _value.toUtc().difference(now).inDays > 0
         ? DateFormat('dd/MM/yyyy').format(_value)
@@ -65,8 +59,6 @@ final class _ConverterDateTimeExt {
   /// <br/>`y` - `year`
   /// <br/>`yy` - `year (2 digits)`
   String format({String? format, String? locale}) {
-    if (_value == null) return '';
-
     final dateFormat = DateFormat(format ?? 'dd/MM/yyyy', locale ?? 'en_US');
     return dateFormat.format(_value);
   }

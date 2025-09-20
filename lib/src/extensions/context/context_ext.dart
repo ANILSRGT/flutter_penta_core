@@ -8,12 +8,10 @@ extension ContextExt on BuildContext {
   _ContextExt get ext => _ContextExt(this);
 }
 
-final class _ContextExt {
+final class _ContextExt
+    with _ScreenContextExt, _ThemeContextExt, _WidgetContextExt {
   const _ContextExt(BuildContext context) : _context = context;
 
+  @override
   final BuildContext _context;
-
-  _ScreenContextExt get screen => _ScreenContextExt(_context);
-  _ThemeContextExt get theme => _ThemeContextExt(_context);
-  _WidgetContextExt get widget => _WidgetContextExt(_context);
 }

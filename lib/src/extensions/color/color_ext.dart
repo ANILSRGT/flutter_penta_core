@@ -7,10 +7,9 @@ extension ColorExt on Color {
   _ColorExt get ext => _ColorExt(this);
 }
 
-final class _ColorExt {
+final class _ColorExt with _MaterialColorExt {
   const _ColorExt(Color color) : _color = color;
 
+  @override
   final Color _color;
-
-  _MaterialColorExt get material => _MaterialColorExt(_color);
 }

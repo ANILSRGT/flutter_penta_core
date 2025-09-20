@@ -4,10 +4,9 @@ extension BoolExt on bool {
   _BoolExt get ext => _BoolExt(value: this);
 }
 
-final class _BoolExt {
+final class _BoolExt with _OperatorBoolExt {
   const _BoolExt({required bool value}) : _value = value;
 
+  @override
   final bool _value;
-
-  _OperatorBoolExt get operator => _OperatorBoolExt(value: _value);
 }

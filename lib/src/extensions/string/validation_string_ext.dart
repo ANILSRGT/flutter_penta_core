@@ -1,9 +1,7 @@
 part of 'string_ext.dart';
 
-final class _ValidationStringExt {
-  const _ValidationStringExt(String? value) : _value = value;
-
-  final String? _value;
+mixin _ValidationStringExt {
+  String? get _value;
 
   bool get isNullOrEmpty => _value == null || _value.isEmpty;
 

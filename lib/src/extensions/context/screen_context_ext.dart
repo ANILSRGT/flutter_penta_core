@@ -1,8 +1,7 @@
 part of 'context_ext.dart';
 
-final class _ScreenContextExt {
-  const _ScreenContextExt(BuildContext context) : _context = context;
-  final BuildContext _context;
+mixin _ScreenContextExt {
+  BuildContext get _context;
 
   MediaQueryData get _mediaQuery => MediaQuery.of(_context);
 

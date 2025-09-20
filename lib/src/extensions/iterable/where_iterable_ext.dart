@@ -1,9 +1,7 @@
 part of 'iterable_ext.dart';
 
-final class _WhereIterableExt<T> {
-  const _WhereIterableExt(Iterable<T> iterable) : _iterable = iterable;
-
-  final Iterable<T> _iterable;
+mixin _WhereIterableExt<T> {
+  Iterable<T> get _iterable;
 
   T? firstOrNull(bool Function(T element) test) {
     for (final element in _iterable) {

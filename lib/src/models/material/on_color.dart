@@ -3,7 +3,7 @@ import 'package:penta_core/penta_core.dart';
 
 class OnColor extends Color {
   OnColor({required Color value, required this.onColor})
-    : super(value.ext.material.toInt);
+    : super(value.ext.toInt);
 
   final Color onColor;
 }

@@ -1,9 +1,7 @@
 part of 'list_ext.dart';
 
-final class _WhereListExt<T> {
-  const _WhereListExt(List<T> list) : _list = list;
-
-  final List<T> _list;
+mixin _WhereListExt<T> {
+  List<T> get _list;
 
   T? firstOrNull(bool Function(T element) test) {
     for (final element in _list) {

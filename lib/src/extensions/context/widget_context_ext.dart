@@ -1,10 +1,6 @@
 part of 'context_ext.dart';
 
-final class _WidgetContextExt {
-  const _WidgetContextExt(BuildContext context) : _context = context;
-
-  final BuildContext _context;
-
+mixin _WidgetContextExt {
   List<Widget> seperateGenerator(List<Widget> widgets, Widget seperator) {
     final result = <Widget>[];
     for (var i = 0; i < widgets.length; i++) {

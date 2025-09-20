@@ -1,8 +1,7 @@
 part of 'color_ext.dart';
 
-final class _MaterialColorExt {
-  const _MaterialColorExt(this.color);
-  final Color color;
+mixin _MaterialColorExt {
+  Color get _color;
 
   static int _floatToInt8(double x) {
     return (x * 255.0).round() & 0xff;
@@ -14,7 +13,7 @@ final class _MaterialColorExt {
       _floatToInt8(color.g) << 8 |
       _floatToInt8(color.b) << 0;
 
-  int get toInt => _toInt(color);
+  int get toInt => _toInt(_color);
 
   MaterialColor get toMaterialColor {
     final swatchColors = <Color>[];
@@ -22,44 +21,44 @@ final class _MaterialColorExt {
       swatchColors.add(
         Color.fromRGBO(
           clampDouble(
-            color.r + (255 - color.r) * index / 6,
-            color.r,
+            _color.r + (255 - _color.r) * index / 6,
+            _color.r,
             255,
           ).toInt(),
           clampDouble(
-            color.g + (255 - color.g) * index / 6,
-            color.g,
+            _color.g + (255 - _color.g) * index / 6,
+            _color.g,
             255,
           ).toInt(),
           clampDouble(
-            color.b + (255 - color.b) * index / 6,
-            color.b,
+            _color.b + (255 - _color.b) * index / 6,
+            _color.b,
             255,
           ).toInt(),
-          color.a,
+          _color.a,
         ),
       );
     }
-    swatchColors.add(color);
+    swatchColors.add(_color);
     for (var index = 4; index > 0; index++) {
       swatchColors.add(
         Color.fromRGBO(
           clampDouble(
-            color.r * index / 5,
+            _color.r * index / 5,
             0,
-            color.r,
+            _color.r,
           ).toInt(),
           clampDouble(
-            color.g * index / 5,
+            _color.g * index / 5,
             0,
-            color.g,
+            _color.g,
           ).toInt(),
           clampDouble(
-            color.b * index / 5,
+            _color.b * index / 5,
             0,
-            color.b,
+            _color.b,
           ).toInt(),
-          color.a,
+          _color.a,
         ),
       );
     }
@@ -67,6 +66,6 @@ final class _MaterialColorExt {
     for (var i = 0; i < swatchColors.length; i++) {
       swatch[i == 0 ? 50 : i * 100] = swatchColors[i];
     }
-    return MaterialColor(_toInt(color), swatch);
+    return MaterialColor(_toInt(_color), swatch);
   }
 }

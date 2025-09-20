@@ -8,12 +8,10 @@ extension DateTimeExt on DateTime {
   _DateTimeExt get ext => _DateTimeExt(this);
 }
 
-final class _DateTimeExt {
+final class _DateTimeExt
+    with _CalcDateTimeExt, _ConverterDateTimeExt, _CompareDateTimeExt {
   const _DateTimeExt(DateTime value) : _value = value;
 
+  @override
   final DateTime _value;
-
-  _CalcDateTimeExt get calc => _CalcDateTimeExt(_value);
-  _ConverterDateTimeExt get converter => _ConverterDateTimeExt(_value);
-  _CompareDateTimeExt get compare => _CompareDateTimeExt(_value);
 }

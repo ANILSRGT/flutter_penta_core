@@ -4,10 +4,10 @@ class PentaShowcaseOverlayWrapper extends StatefulWidget {
   PentaShowcaseOverlayWrapper({
     required this.child,
     required this.infoChild,
-    required this.showcaseOpen,
     required this.layerLink,
     required this.showcaseKey,
     required this.infoAlign,
+    required this.showcaseOpen,
     super.key,
     this.onBarrierTap,
     this.arrowConfig = const PentaDrawArrowConfig(),
@@ -16,8 +16,8 @@ class PentaShowcaseOverlayWrapper extends StatefulWidget {
 
   final Widget child;
   final Widget infoChild;
-  final bool showcaseOpen;
   final LayerLink layerLink;
+  final bool showcaseOpen;
   final GlobalKey showcaseKey;
   final Alignment infoAlign;
   final VoidCallback? onBarrierTap;
@@ -50,21 +50,21 @@ class _PentaShowcaseOverlayWrapperState
         Positioned.fill(child: widget.child),
 
         if (widget.showcaseOpen) ...[
-          GestureDetector(
-            behavior: HitTestBehavior.translucent,
-            onTap: widget.onBarrierTap,
-            child: Container(
-              color: Colors.black.withValues(alpha: 0.7),
+          Positioned.fill(
+            child: GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: widget.onBarrierTap,
+              child: Container(
+                color: Colors.black.withValues(alpha: 0.7),
+              ),
             ),
           ),
           if (widget.arrowConfig.visible)
-            Positioned.fill(
-              child: PentaDrawArrowCustomPaint(
-                fromWidgetKey: widget.showcaseKey,
-                toWidgetKey: widget.infoKey,
-                arrowConfig: widget.arrowConfig,
-                updateEventBus: widget.updateEventBus,
-              ),
+            PentaDrawArrowCustomPaint(
+              fromWidgetKey: widget.showcaseKey,
+              toWidgetKey: widget.infoKey,
+              arrowConfig: widget.arrowConfig,
+              updateEventBus: widget.updateEventBus,
             ),
 
           SafeArea(

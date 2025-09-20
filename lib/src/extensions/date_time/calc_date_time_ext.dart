@@ -1,9 +1,7 @@
 part of 'date_time_ext.dart';
 
-final class _CalcDateTimeExt {
-  const _CalcDateTimeExt(DateTime value) : _value = value;
-
-  final DateTime _value;
+mixin _CalcDateTimeExt {
+  DateTime get _value;
 
   DateTime minus({
     int year = 0,

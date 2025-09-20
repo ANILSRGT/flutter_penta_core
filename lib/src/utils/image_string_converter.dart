@@ -15,7 +15,7 @@ final class ImageStringConverter {
       } else if (RegExp(r'^\w+:').hasMatch(image)) {
         return FileImage(File(image));
       } else if (image.startsWith('data')) {
-        return MemoryImage(image.ext.convert.toUint8List);
+        return MemoryImage(image.ext.toUint8List);
       }
     } on Exception catch (_) {
       return null;

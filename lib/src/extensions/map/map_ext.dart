@@ -4,10 +4,9 @@ extension MapExt<K, V> on Map<K, V> {
   _MapExt<K, V> get ext => _MapExt<K, V>(this);
 }
 
-final class _MapExt<K, V> {
+final class _MapExt<K, V> with _WhereMapExt<K, V> {
   const _MapExt(Map<K, V> map) : _map = map;
 
+  @override
   final Map<K, V> _map;
-
-  _WhereMapExt<K, V> get where => _WhereMapExt<K, V>(_map);
 }

@@ -83,7 +83,7 @@ class _ShowcaseExamplePageState extends State<ShowcaseExamplePage> {
                       children: [
                         AppBar(),
                         Spacer(),
-                        ...const Text("Widget").ext.widget * 18,
+                        ...const Text("Widget").ext * 18,
                         PentaShowcase(
                           showcaseOpen: showcaseOpen,
                           layerLink: layerLink,
@@ -91,7 +91,7 @@ class _ShowcaseExamplePageState extends State<ShowcaseExamplePage> {
                           widget: highlightButton,
                           showcaseWidget: highlightButton,
                         ),
-                        ...const Text("Widget").ext.widget * 2,
+                        ...const Text("Widget").ext * 2,
                         Spacer(),
                       ],
                     ),
