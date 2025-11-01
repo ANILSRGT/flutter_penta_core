@@ -2168,54 +2168,54 @@ class PhoneList {
   }) {
     switch (languageCode.toLowerCase()) {
       case 'tr':
-        return _TurkishCountryNames.names[countryCode] ?? countryCode.name;
+        return _TurkishTrCountryNames.names[countryCode] ?? countryCode.name;
       case 'de':
-        return _GermanCountryNames.names[countryCode] ?? countryCode.name;
+        return _GermanDeCountryNames.names[countryCode] ?? countryCode.name;
       case 'fr':
-        return _FrenchCountryNames.names[countryCode] ?? countryCode.name;
+        return _FrenchFrCountryNames.names[countryCode] ?? countryCode.name;
       case 'es':
-        return _SpanishCountryNames.names[countryCode] ?? countryCode.name;
+        return _SpanishEsCountryNames.names[countryCode] ?? countryCode.name;
       case 'ru':
-        return _RussianCountryNames.names[countryCode] ?? countryCode.name;
+        return _RussianRuCountryNames.names[countryCode] ?? countryCode.name;
       case 'ja':
-        return _JapaneseCountryNames.names[countryCode] ?? countryCode.name;
+        return _JapaneseJpCountryNames.names[countryCode] ?? countryCode.name;
       case 'ko':
-        return _KoreanCountryNames.names[countryCode] ?? countryCode.name;
+        return _KoreanKrCountryNames.names[countryCode] ?? countryCode.name;
       case 'it':
-        return _ItalianCountryNames.names[countryCode] ?? countryCode.name;
+        return _ItalianItCountryNames.names[countryCode] ?? countryCode.name;
       case 'pt':
-        return _PortugueseCountryNames.names[countryCode] ?? countryCode.name;
+        return _PortuguesePtCountryNames.names[countryCode] ?? countryCode.name;
       case 'nl':
-        return _DutchCountryNames.names[countryCode] ?? countryCode.name;
+        return _DutchNlCountryNames.names[countryCode] ?? countryCode.name;
       case 'ar':
-        return _ArabicCountryNames.names[countryCode] ?? countryCode.name;
+        return _ArabicSaCountryNames.names[countryCode] ?? countryCode.name;
       case 'hi':
-        return _HindiCountryNames.names[countryCode] ?? countryCode.name;
+        return _HindiInCountryNames.names[countryCode] ?? countryCode.name;
       case 'zh':
-        return _ChineseCountryNames.names[countryCode] ?? countryCode.name;
+        return _ChineseCnCountryNames.names[countryCode] ?? countryCode.name;
       case 'bn':
-        return _BengaliCountryNames.names[countryCode] ?? countryCode.name;
+        return _BengaliBdCountryNames.names[countryCode] ?? countryCode.name;
       case 'id':
-        return _IndonesianCountryNames.names[countryCode] ?? countryCode.name;
+        return _IndonesianIdCountryNames.names[countryCode] ?? countryCode.name;
       case 'vi':
-        return _VietnameseCountryNames.names[countryCode] ?? countryCode.name;
+        return _VietnameseVnCountryNames.names[countryCode] ?? countryCode.name;
       case 'th':
-        return _ThaiCountryNames.names[countryCode] ?? countryCode.name;
+        return _ThaiThCountryNames.names[countryCode] ?? countryCode.name;
       case 'pl':
-        return _PolishCountryNames.names[countryCode] ?? countryCode.name;
+        return _PolishPlCountryNames.names[countryCode] ?? countryCode.name;
       case 'uk':
-        return _UkrainianCountryNames.names[countryCode] ?? countryCode.name;
+        return _UkrainianUaCountryNames.names[countryCode] ?? countryCode.name;
       case 'el':
-        return _GreekCountryNames.names[countryCode] ?? countryCode.name;
+        return _GreekGrCountryNames.names[countryCode] ?? countryCode.name;
       case 'sv':
-        return _SwedishCountryNames.names[countryCode] ?? countryCode.name;
+        return _SwedishSeCountryNames.names[countryCode] ?? countryCode.name;
       case 'ur':
-        return _UrduCountryNames.names[countryCode] ?? countryCode.name;
+        return _UrduPkCountryNames.names[countryCode] ?? countryCode.name;
       case 'fa':
-        return _PersianCountryNames.names[countryCode] ?? countryCode.name;
+        return _PersianIrCountryNames.names[countryCode] ?? countryCode.name;
       case 'en':
       default:
-        return _EnglishCountryNames.names[countryCode] ?? countryCode.name;
+        return _EnglishGbCountryNames.names[countryCode] ?? countryCode.name;
     }
   }
 }

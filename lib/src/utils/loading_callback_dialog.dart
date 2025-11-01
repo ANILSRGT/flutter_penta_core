@@ -18,6 +18,7 @@ final class LoadingCallbackDialog {
     Widget? customLoading,
     bool cancelable = false,
     FutureOr<void> Function()? cancelableCallback,
+    String cancelButtonText = 'Cancel',
   }) async {
     var isCanceled = false;
 
@@ -45,7 +46,7 @@ final class LoadingCallbackDialog {
                                 isCanceled = true;
                                 Navigator.pop(context, true);
                               },
-                              child: const Text('Cancel'),
+                              child: Text(cancelButtonText),
                             ),
                           ],
                         ),

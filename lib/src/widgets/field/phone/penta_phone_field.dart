@@ -9,30 +9,30 @@ part 'penta_phone_field_configs.dart';
 part 'lang/phone_field_strings.dart';
 part 'lang/phone_field_language_helper.dart';
 
-part 'lang/ar.dart';
-part 'lang/bn.dart';
-part 'lang/de.dart';
-part 'lang/el.dart';
-part 'lang/en.dart';
-part 'lang/es.dart';
-part 'lang/fa.dart';
-part 'lang/fr.dart';
-part 'lang/hi.dart';
-part 'lang/id.dart';
-part 'lang/it.dart';
-part 'lang/ja.dart';
-part 'lang/ko.dart';
-part 'lang/nl.dart';
-part 'lang/pl.dart';
-part 'lang/pt.dart';
-part 'lang/ru.dart';
-part 'lang/sv.dart';
-part 'lang/th.dart';
-part 'lang/tr.dart';
-part 'lang/uk.dart';
-part 'lang/ur.dart';
-part 'lang/vi.dart';
-part 'lang/zh.dart';
+part 'lang/ar_sa.dart';
+part 'lang/bn_bd.dart';
+part 'lang/de_de.dart';
+part 'lang/el_gr.dart';
+part 'lang/en_gb.dart';
+part 'lang/es_es.dart';
+part 'lang/fa_ir.dart';
+part 'lang/fr_fr.dart';
+part 'lang/hi_in.dart';
+part 'lang/id_id.dart';
+part 'lang/it_it.dart';
+part 'lang/ja_jp.dart';
+part 'lang/ko_kr.dart';
+part 'lang/nl_nl.dart';
+part 'lang/pl_pl.dart';
+part 'lang/pt_pt.dart';
+part 'lang/ru_ru.dart';
+part 'lang/sv_se.dart';
+part 'lang/th_th.dart';
+part 'lang/tr_tr.dart';
+part 'lang/uk_ua.dart';
+part 'lang/ur_pk.dart';
+part 'lang/vi_vn.dart';
+part 'lang/zh_cn.dart';
 
 /// Phone field widget with full customization support
 class PentaPhoneField extends StatefulWidget {
@@ -166,8 +166,11 @@ class _PentaPhoneFieldState extends State<PentaPhoneField> {
 
     if (phoneNumber.length < phoneInfo.minLength ||
         phoneNumber.length > phoneInfo.maxLength) {
-      final errorMessage =
-          'Phone number must be between ${phoneInfo.minLength} and ${phoneInfo.maxLength} digits';
+      final errorMessage = _PhoneFieldLanguageHelper.getPhoneFieldStrings(
+            widget.languageCode,
+          ).phoneNumberValidationError
+          .replaceAll('{minLength}', phoneInfo.minLength.toString())
+          .replaceAll('{maxLength}', phoneInfo.maxLength.toString());
       _lastError = errorMessage;
       _lastValidPhoneNumber = null;
       widget.callbacks.onInvalidPhoneNumber?.call(phoneNumber, errorMessage);
@@ -458,6 +461,7 @@ class _PentaPhoneFieldState extends State<PentaPhoneField> {
             phoneList: _phoneList,
             selectedCountry: _selectedCountryCode,
             showSearch: widget.selection.showSearch,
+            languageCode: widget.languageCode,
             searchHint: widget.selection.searchHint,
             searchNoResultsText: widget.selection.searchNoResultsText,
             title: widget.selection.bottomSheetTitle,
@@ -671,6 +675,7 @@ class _CountrySelectionBottomSheet extends StatefulWidget {
     required this.selectedCountry,
     required this.showSearch,
     required this.onCountrySelected,
+    required this.languageCode,
     this.searchHint,
     this.searchNoResultsText,
     this.title,
@@ -682,6 +687,7 @@ class _CountrySelectionBottomSheet extends StatefulWidget {
   phoneList;
   final PentaPhoneFieldCountryCodesEnum? selectedCountry;
   final bool showSearch;
+  final String languageCode;
   final String? searchHint;
   final String? searchNoResultsText;
   final String? title;
@@ -755,7 +761,11 @@ class _CountrySelectionBottomSheetState
             TextField(
               onChanged: _filterCountries,
               decoration: InputDecoration(
-                hintText: widget.searchHint ?? 'Search countries...',
+                hintText:
+                    widget.searchHint ??
+                    _PhoneFieldLanguageHelper.getPhoneFieldStrings(
+                      widget.languageCode,
+                    ).searchCountries,
                 prefixIcon: const Icon(Icons.search),
                 border: const OutlineInputBorder(),
               ),
@@ -767,7 +777,10 @@ class _CountrySelectionBottomSheetState
                 _filteredCountries.isEmpty
                     ? Center(
                       child: Text(
-                        widget.searchNoResultsText ?? 'No countries found',
+                        widget.searchNoResultsText ??
+                            _PhoneFieldLanguageHelper.getPhoneFieldStrings(
+                              widget.languageCode,
+                            ).noCountriesFound,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: Colors.grey,
                         ),

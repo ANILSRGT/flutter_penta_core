@@ -58,8 +58,16 @@ mixin _ConverterDateTimeExt {
   /// <br/>`S` - `millisecond (000-999)`
   /// <br/>`y` - `year`
   /// <br/>`yy` - `year (2 digits)`
-  String format({String? format, String? locale}) {
-    final dateFormat = DateFormat(format ?? 'dd/MM/yyyy', locale ?? 'en_US');
+  String format({String? format, Locale? locale}) {
+    final langCode = locale?.languageCode;
+    final countryCode = locale?.countryCode;
+    final fullLocale =
+        langCode == null
+            ? 'en_US'
+            : countryCode == null
+            ? langCode
+            : '${langCode}_$countryCode';
+    final dateFormat = DateFormat(format ?? 'dd/MM/yyyy', fullLocale);
     return dateFormat.format(_value);
   }
 }

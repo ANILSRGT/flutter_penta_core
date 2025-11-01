@@ -4,55 +4,55 @@ class _PhoneFieldLanguageHelper {
   static _PhoneFieldStrings getPhoneFieldStrings(String languageCode) {
     switch (languageCode) {
       case 'ar':
-        return _ArabicCountryNames.phoneFieldStrings;
+        return _ArabicSaCountryNames.phoneFieldStrings;
       case 'bn':
-        return _BengaliCountryNames.phoneFieldStrings;
+        return _BengaliBdCountryNames.phoneFieldStrings;
       case 'de':
-        return _GermanCountryNames.phoneFieldStrings;
+        return _GermanDeCountryNames.phoneFieldStrings;
       case 'el':
-        return _GreekCountryNames.phoneFieldStrings;
+        return _GreekGrCountryNames.phoneFieldStrings;
       case 'en':
-        return _EnglishCountryNames.phoneFieldStrings;
+        return _EnglishGbCountryNames.phoneFieldStrings;
       case 'es':
-        return _SpanishCountryNames.phoneFieldStrings;
+        return _SpanishEsCountryNames.phoneFieldStrings;
       case 'fa':
-        return _PersianCountryNames.phoneFieldStrings;
+        return _PersianIrCountryNames.phoneFieldStrings;
       case 'fr':
-        return _FrenchCountryNames.phoneFieldStrings;
+        return _FrenchFrCountryNames.phoneFieldStrings;
       case 'hi':
-        return _HindiCountryNames.phoneFieldStrings;
+        return _HindiInCountryNames.phoneFieldStrings;
       case 'id':
-        return _IndonesianCountryNames.phoneFieldStrings;
+        return _IndonesianIdCountryNames.phoneFieldStrings;
       case 'it':
-        return _ItalianCountryNames.phoneFieldStrings;
+        return _ItalianItCountryNames.phoneFieldStrings;
       case 'ja':
-        return _JapaneseCountryNames.phoneFieldStrings;
+        return _JapaneseJpCountryNames.phoneFieldStrings;
       case 'ko':
-        return _KoreanCountryNames.phoneFieldStrings;
+        return _KoreanKrCountryNames.phoneFieldStrings;
       case 'nl':
-        return _DutchCountryNames.phoneFieldStrings;
+        return _DutchNlCountryNames.phoneFieldStrings;
       case 'pl':
-        return _PolishCountryNames.phoneFieldStrings;
+        return _PolishPlCountryNames.phoneFieldStrings;
       case 'pt':
-        return _PortugueseCountryNames.phoneFieldStrings;
+        return _PortuguesePtCountryNames.phoneFieldStrings;
       case 'ru':
-        return _RussianCountryNames.phoneFieldStrings;
+        return _RussianRuCountryNames.phoneFieldStrings;
       case 'sv':
-        return _SwedishCountryNames.phoneFieldStrings;
+        return _SwedishSeCountryNames.phoneFieldStrings;
       case 'th':
-        return _ThaiCountryNames.phoneFieldStrings;
+        return _ThaiThCountryNames.phoneFieldStrings;
       case 'tr':
-        return _TurkishCountryNames.phoneFieldStrings;
+        return _TurkishTrCountryNames.phoneFieldStrings;
       case 'uk':
-        return _UkrainianCountryNames.phoneFieldStrings;
+        return _UkrainianUaCountryNames.phoneFieldStrings;
       case 'ur':
-        return _UrduCountryNames.phoneFieldStrings;
+        return _UrduPkCountryNames.phoneFieldStrings;
       case 'vi':
-        return _VietnameseCountryNames.phoneFieldStrings;
+        return _VietnameseVnCountryNames.phoneFieldStrings;
       case 'zh':
-        return _ChineseCountryNames.phoneFieldStrings;
+        return _ChineseCnCountryNames.phoneFieldStrings;
       default:
-        return _EnglishCountryNames.phoneFieldStrings;
+        return _EnglishGbCountryNames.phoneFieldStrings;
     }
   }
 }
