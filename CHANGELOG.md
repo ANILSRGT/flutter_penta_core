@@ -1,3 +1,11 @@
+# Changelog
+## 2.1.0
+* Fixed localization arguments.
+* Added contextless translation methods:
+  - tr(): Translate using the globally registered notifier (no BuildContext).
+  - trWithArgs(List<String> args): Translate with positional arguments using the globally registered notifier.
+  - trWithNamedArgs(Map<String, String> args): Translate with named arguments using the globally registered notifier.
+
 ## 2.0.0
 * Toast: Toast notification widget for displaying brief messages to users
 * Showcase Tutorial Widget: Widget for creating interactive onboarding tutorials and feature highlights

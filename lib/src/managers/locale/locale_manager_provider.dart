@@ -11,6 +11,9 @@ class LocaleManagerProvider extends InheritedNotifier<_LocaleManagerNotifier> {
     required Widget child,
   }) {
     final notifier = _LocaleManagerNotifier(defaultLocale: defaultLocale);
+    // Register notifier to LocaleManager singleton so translations
+    // can be performed without BuildContext when needed.
+    LocaleManager.I._registerNotifier(notifier);
     return LocaleManagerProvider._(notifier: notifier, child: child);
   }
 

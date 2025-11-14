@@ -1,5 +1,7 @@
 {
   "greeting": "Merhaba",
   "changeLanguage": "Dili Değiştir",
-  "test": "dene {}"
+  "test": "dene {}",
+  "testMulti": "dene {} ve {}",
+  "testNamed": "dene {name} ve {age}"
 }

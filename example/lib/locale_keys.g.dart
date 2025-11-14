@@ -6,4 +6,6 @@ class LocaleKeys {
 	static String get greeting => 'greeting';
 	static String get changeLanguage => 'changeLanguage';
 	static String get testArgs1 => 'test';
+	static String get testMultiArgs2 => 'testMulti';
+	static String get testNamedArgs2 => 'testNamed';
 }

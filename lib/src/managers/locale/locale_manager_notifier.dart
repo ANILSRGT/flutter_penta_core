@@ -26,7 +26,23 @@ class _LocaleManagerNotifier<T extends Enum> extends ChangeNotifier {
     if (localizedStrings.containsKey(key)) {
       var translatedString = localizedStrings[key] ?? key;
       for (var i = 0; i < args.length; i++) {
-        translatedString = translatedString.replaceAll('{}', args[i]);
+        translatedString = translatedString.replaceFirst('{}', args[i]);
+      }
+      return translatedString;
+    }
+    return key;
+  }
+
+  String translateWithNamedArgs(String key, Map<String, String> args) {
+    final localizedStrings =
+        LocaleManager.I._localizedStrings[_currentLocale] ?? {};
+    if (localizedStrings.containsKey(key)) {
+      var translatedString = localizedStrings[key] ?? key;
+      for (final entry in args.entries) {
+        translatedString = translatedString.replaceFirst(
+          '{${entry.key}}',
+          entry.value,
+        );
       }
       return translatedString;
     }

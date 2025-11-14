@@ -1,6 +1,6 @@
 name: penta_core
 description: "A package for Penta Core, a Flutter package that provides a set of utilities and tools to help developers build high-quality applications quickly and efficiently."
-version: 2.0.0
+version: 2.1.0
 homepage: https://github.com/ANILSRGT
 repository: https://github.com/ANILSRGT/flutter_penta_core
 license: MIT
@@ -24,8 +24,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  very_good_analysis: ^9.0.0
-  build_runner: ^2.6.0
+  very_good_analysis: ^10.0.0
+  build_runner: ^2.7.1
 
 flutter:
   uses-material-design: true

@@ -1,4 +1,5 @@
 import 'dart:convert' show jsonDecode;
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -13,6 +14,16 @@ class LocaleManager<T extends Enum> {
   static LocaleManager get I => _instance;
 
   final Map<T, Map<String, String>> _localizedStrings = {};
+  _LocaleManagerNotifier? _notifier;
+
+  /// Global notifier getter. Available for context-less translations.
+  _LocaleManagerNotifier? get notifier => _notifier;
+
+  /// Register the notifier created by the provider so translations
+  /// can be performed without a BuildContext.
+  void _registerNotifier(_LocaleManagerNotifier notifier) {
+    _notifier = notifier;
+  }
 
   /// ex. json file path: `assets/translations/`
   /// <br/>ex. json file name: `en.json` or `enUS.json`

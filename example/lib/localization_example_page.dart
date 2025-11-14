@@ -10,7 +10,7 @@ class LocalizationExamplePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(LocaleKeys.greeting.translate(context))),
+      appBar: AppBar(title: Text(LocaleKeys.greeting.tr())),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -24,9 +24,16 @@ class LocalizationExamplePage extends StatelessWidget {
                         : AppLocale.en;
                 context.localeManagerNotifierRead.changeLocale(newLocale);
               },
-              child: Text(LocaleKeys.changeLanguage.translate(context)),
+              child: Text(LocaleKeys.changeLanguage.tr()),
             ),
-            Text(LocaleKeys.testArgs1.translateWithArgs(context, ['Test Arg'])),
+            Text(LocaleKeys.testArgs1.trWithArgs(['ARG 1'])),
+            Text(LocaleKeys.testMultiArgs2.trWithArgs(['ARG 1', 'ARG 2'])),
+            Text(
+              LocaleKeys.testNamedArgs2.trWithNamedArgs({
+                'name': 'John',
+                'age': '20',
+              }),
+            ),
           ],
         ),
       ),
