@@ -11,24 +11,20 @@ final class RemovePaddingList {
     required EdgeInsets padding,
     required List<Widget> Function(EdgeInsets padding) children,
   }) {
-    return children(padding).map((child) {
-      if (child is RemovePaddingIgnore) {
-        return child;
-      }
+    return children(padding)
+        .map((child) {
+          if (child is RemovePaddingIgnore) {
+            return child;
+          }
 
-      return Padding(
-        padding: padding,
-        child: child,
-      );
-    }).toList(growable: false);
+          return Padding(padding: padding, child: child);
+        })
+        .toList(growable: false);
   }
 }
 
 class RemovePaddingIgnore extends StatelessWidget {
-  const RemovePaddingIgnore({
-    required this.child,
-    super.key,
-  });
+  const RemovePaddingIgnore({required this.child, super.key});
 
   final Widget child;
 
@@ -40,8 +36,6 @@ class RemovePaddingIgnore extends StatelessWidget {
 
 extension RemovePaddingX on Widget {
   RemovePaddingIgnore get toRemovePaddingIgnore {
-    return RemovePaddingIgnore(
-      child: this,
-    );
+    return RemovePaddingIgnore(child: this);
   }
 }

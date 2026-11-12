@@ -205,12 +205,13 @@ class _PolishPlCountryNames {
     PentaPhoneFieldCountryCodesEnum.zimbabwe: 'Zimbabwe',
   };
 
-  static const _PhoneFieldStrings phoneFieldStrings = _PhoneFieldStrings(
-    phoneNumber: 'Numer telefonu',
-    selectCountry: 'Wybierz kraj',
-    searchCountries: 'Szukaj krajów...',
-    noCountriesFound: 'Nie znaleziono krajów',
-    phoneNumberValidationError:
-        'Numer telefonu musi zawierać od {minLength} do {maxLength} cyfr',
-  );
+  static const PentaPhoneFieldStrings phoneFieldStrings =
+      PentaPhoneFieldStrings(
+        phoneNumber: 'Numer telefonu',
+        selectCountry: 'Wybierz kraj',
+        searchCountries: 'Szukaj krajów...',
+        noCountriesFound: 'Nie znaleziono krajów',
+        phoneNumberValidationError:
+            'Numer telefonu musi zawierać od {minLength} do {maxLength} cyfr',
+      );
 }

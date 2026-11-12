@@ -207,7 +207,8 @@ class _GreekGrCountryNames {
     PentaPhoneFieldCountryCodesEnum.zimbabwe: 'Ζιμπάμπουε',
   };
 
-  static const _PhoneFieldStrings phoneFieldStrings = _PhoneFieldStrings(
+  static const PentaPhoneFieldStrings
+  phoneFieldStrings = PentaPhoneFieldStrings(
     phoneNumber: 'Αριθμός τηλεφώνου',
     selectCountry: 'Επιλέξτε Χώρα',
     searchCountries: 'Αναζήτηση χωρών...',

@@ -200,11 +200,13 @@ class _JapaneseJpCountryNames {
     PentaPhoneFieldCountryCodesEnum.zimbabwe: 'ジンバブエ',
   };
 
-  static const _PhoneFieldStrings phoneFieldStrings = _PhoneFieldStrings(
-    phoneNumber: '電話番号',
-    selectCountry: '国を選択',
-    searchCountries: '国を検索...',
-    noCountriesFound: '国が見つかりません',
-    phoneNumberValidationError: '電話番号は{minLength}桁から{maxLength}桁の間である必要があります',
-  );
+  static const PentaPhoneFieldStrings phoneFieldStrings =
+      PentaPhoneFieldStrings(
+        phoneNumber: '電話番号',
+        selectCountry: '国を選択',
+        searchCountries: '国を検索...',
+        noCountriesFound: '国が見つかりません',
+        phoneNumberValidationError:
+            '電話番号は{minLength}桁から{maxLength}桁の間である必要があります',
+      );
 }

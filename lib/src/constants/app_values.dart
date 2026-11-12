@@ -1,10 +1,40 @@
-/// Configuration class for app values that can be initialized at app startup
-class AppValuesConfig {
-  AppValuesConfig._init();
-  static final AppValuesConfig _instance = AppValuesConfig._init();
-  static AppValuesConfig get I => _instance;
+import 'package:flutter/foundation.dart';
 
-  /// Initialize app values with custom values
+/// Spacing / sizing scale used by [AppValues].
+///
+/// Configure it once at startup:
+///
+/// ```dart
+/// AppValues.configure(const AppValuesConfig(md: 14, lg: 18));
+/// ```
+@immutable
+final class AppValuesConfig {
+  const AppValuesConfig({
+    this.infinity = double.infinity,
+    this.zero = 0,
+    this.xxs = 2,
+    this.xs = 4,
+    this.sm = 8,
+    this.md = 12,
+    this.lg = 16,
+    this.xl = 20,
+    this.xl2 = 24,
+    this.xl3 = 28,
+    this.xl4 = 32,
+    this.xl5 = 36,
+    this.xl6 = 40,
+    this.full = 9999,
+  });
+
+  /// Active configuration.
+  @Deprecated('Use AppValues.config instead. Will be removed in 4.0.0.')
+  static AppValuesConfig get I => AppValues.config;
+
+  /// Replaces the active configuration with the given values.
+  @Deprecated(
+    'Use AppValues.configure(AppValuesConfig(...)) instead. '
+    'Will be removed in 4.0.0.',
+  )
   static void initialize({
     double? infinity,
     double? zero,
@@ -21,59 +51,100 @@ class AppValuesConfig {
     double? xl6,
     double? full,
   }) {
-    AppValuesConfig.I
-      .._infinity = infinity ?? double.infinity
-      .._zero = zero ?? 0
-      .._xxs = xxs ?? 2
-      .._xs = xs ?? 4
-      .._sm = sm ?? 8
-      .._md = md ?? 12
-      .._lg = lg ?? 16
-      .._xl = xl ?? 20
-      .._xl2 = xl2 ?? 24
-      .._xl3 = xl3 ?? 28
-      .._xl4 = xl4 ?? 32
-      .._xl5 = xl5 ?? 36
-      .._xl6 = xl6 ?? 40
-      .._full = full ?? 9999;
+    AppValues.configure(
+      const AppValuesConfig().copyWith(
+        infinity: infinity,
+        zero: zero,
+        xxs: xxs,
+        xs: xs,
+        sm: sm,
+        md: md,
+        lg: lg,
+        xl: xl,
+        xl2: xl2,
+        xl3: xl3,
+        xl4: xl4,
+        xl5: xl5,
+        xl6: xl6,
+        full: full,
+      ),
+    );
   }
 
-  // Private fields with default values
-  double _infinity = double.infinity;
-  double _zero = 0;
-  double _xxs = 2;
-  double _xs = 4;
-  double _sm = 8;
-  double _md = 12;
-  double _lg = 16;
-  double _xl = 20;
-  double _xl2 = 24;
-  double _xl3 = 28;
-  double _xl4 = 32;
-  double _xl5 = 36;
-  double _xl6 = 40;
-  double _full = 9999;
+  final double infinity;
+  final double zero;
+  final double xxs;
+  final double xs;
+  final double sm;
+  final double md;
+  final double lg;
+  final double xl;
+  final double xl2;
+  final double xl3;
+  final double xl4;
+  final double xl5;
+  final double xl6;
+  final double full;
 
-  // Getters
-  double get infinity => _infinity;
-  double get zero => _zero;
-  double get xxs => _xxs;
-  double get xs => _xs;
-  double get sm => _sm;
-  double get md => _md;
-  double get lg => _lg;
-  double get xl => _xl;
-  double get xl2 => _xl2;
-  double get xl3 => _xl3;
-  double get xl4 => _xl4;
-  double get xl5 => _xl5;
-  double get xl6 => _xl6;
-  double get full => _full;
+  /// Returns the configured value of [value].
+  double resolve(AppValues value) => switch (value) {
+    AppValues.infinity => infinity,
+    AppValues.zero => zero,
+    AppValues.xxs => xxs,
+    AppValues.xs => xs,
+    AppValues.sm => sm,
+    AppValues.md => md,
+    AppValues.lg => lg,
+    AppValues.xl => xl,
+    AppValues.xl2 => xl2,
+    AppValues.xl3 => xl3,
+    AppValues.xl4 => xl4,
+    AppValues.xl5 => xl5,
+    AppValues.xl6 => xl6,
+    AppValues.full => full,
+  };
+
+  AppValuesConfig copyWith({
+    double? infinity,
+    double? zero,
+    double? xxs,
+    double? xs,
+    double? sm,
+    double? md,
+    double? lg,
+    double? xl,
+    double? xl2,
+    double? xl3,
+    double? xl4,
+    double? xl5,
+    double? xl6,
+    double? full,
+  }) {
+    return AppValuesConfig(
+      infinity: infinity ?? this.infinity,
+      zero: zero ?? this.zero,
+      xxs: xxs ?? this.xxs,
+      xs: xs ?? this.xs,
+      sm: sm ?? this.sm,
+      md: md ?? this.md,
+      lg: lg ?? this.lg,
+      xl: xl ?? this.xl,
+      xl2: xl2 ?? this.xl2,
+      xl3: xl3 ?? this.xl3,
+      xl4: xl4 ?? this.xl4,
+      xl5: xl5 ?? this.xl5,
+      xl6: xl6 ?? this.xl6,
+      full: full ?? this.full,
+    );
+  }
 }
 
-/// AppValues enum that provides the same API as before but uses configurable values
+/// Design token scale for paddings, gaps and radii.
+///
+/// Values come from the active [AppValuesConfig]; change it with
+/// [AppValues.configure].
 enum AppValues {
-  /// double.infinity
+  /// `double.infinity`
   infinity,
 
   /// 0
@@ -115,38 +186,18 @@ enum AppValues {
   /// 9999
   full;
 
-  /// Get the configurable value for this enum
-  double get value {
-    final config = AppValuesConfig.I;
-    switch (this) {
-      case AppValues.infinity:
-        return config.infinity;
-      case AppValues.zero:
-        return config.zero;
-      case AppValues.xxs:
-        return config.xxs;
-      case AppValues.xs:
-        return config.xs;
-      case AppValues.sm:
-        return config.sm;
-      case AppValues.md:
-        return config.md;
-      case AppValues.lg:
-        return config.lg;
-      case AppValues.xl:
-        return config.xl;
-      case AppValues.xl2:
-        return config.xl2;
-      case AppValues.xl3:
-        return config.xl3;
-      case AppValues.xl4:
-        return config.xl4;
-      case AppValues.xl5:
-        return config.xl5;
-      case AppValues.xl6:
-        return config.xl6;
-      case AppValues.full:
-        return config.full;
-    }
-  }
+  static AppValuesConfig _config = const AppValuesConfig();
+
+  /// The active configuration.
+  static AppValuesConfig get config => _config;
+
+  /// Replaces the active configuration. Call before `runApp`.
+  static void configure(AppValuesConfig config) => _config = config;
+
+  /// Restores the default configuration.
+  @visibleForTesting
+  static void reset() => _config = const AppValuesConfig();
+
+  /// Configured value of this token.
+  double get value => _config.resolve(this);
 }

@@ -203,12 +203,13 @@ class _HindiInCountryNames {
     PentaPhoneFieldCountryCodesEnum.zimbabwe: 'ज़िम्बाब्वे',
   };
 
-  static const _PhoneFieldStrings phoneFieldStrings = _PhoneFieldStrings(
-    phoneNumber: 'फ़ोन नंबर',
-    selectCountry: 'देश चुनें',
-    searchCountries: 'देशों की खोज करें...',
-    noCountriesFound: 'कोई देश नहीं मिला',
-    phoneNumberValidationError:
-        'फ़ोन नंबर {minLength} से {maxLength} अंकों के बीच होना चाहिए',
-  );
+  static const PentaPhoneFieldStrings phoneFieldStrings =
+      PentaPhoneFieldStrings(
+        phoneNumber: 'फ़ोन नंबर',
+        selectCountry: 'देश चुनें',
+        searchCountries: 'देशों की खोज करें...',
+        noCountriesFound: 'कोई देश नहीं मिला',
+        phoneNumberValidationError:
+            'फ़ोन नंबर {minLength} से {maxLength} अंकों के बीच होना चाहिए',
+      );
 }

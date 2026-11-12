@@ -204,7 +204,8 @@ class _PortuguesePtCountryNames {
     PentaPhoneFieldCountryCodesEnum.zimbabwe: 'Zimbábue',
   };
 
-  static const _PhoneFieldStrings phoneFieldStrings = _PhoneFieldStrings(
+  static const PentaPhoneFieldStrings
+  phoneFieldStrings = PentaPhoneFieldStrings(
     phoneNumber: 'Número de telefone',
     selectCountry: 'Selecionar País',
     searchCountries: 'Pesquisar países...',

@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
-import 'package:penta_core/penta_core.dart';
+import 'package:penta_core/src/utils/penta_event_bus.dart';
 
 part 'penta_draw_arrow_config.dart';
 part 'penta_draw_arrow_style.dart';
@@ -21,15 +23,13 @@ class _PentaDrawArrowPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     if (from == null || to == null) return;
 
-    // If you used 'reverse' earlier, keep same semantic:
     final start = arrowConfig.reverse ? from! : to!;
     final end = arrowConfig.reverse ? to! : from!;
 
-    final paint =
-        Paint()
-          ..strokeWidth = arrowConfig.strokeWidth
-          ..style = PaintingStyle.stroke
-          ..strokeCap = StrokeCap.round;
+    final paint = Paint()
+      ..strokeWidth = arrowConfig.strokeWidth
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round;
 
     if (arrowConfig.gradient != null) {
       final rect = Rect.fromPoints(start, end);
@@ -40,9 +40,8 @@ class _PentaDrawArrowPainter extends CustomPainter {
 
     final curveDirection = _drawArrowLine(canvas, start, end, paint);
 
-    // Arrow head
-    const arrowHeadLength = 15.0;
-    const arrowHeadAngle = math.pi / 6;
+    final arrowHeadLength = arrowConfig.headLength;
+    final arrowHeadAngle = arrowConfig.headAngle;
 
     final arrowHead1 = Offset(
       end.dx - math.cos(curveDirection - arrowHeadAngle) * arrowHeadLength,
@@ -109,8 +108,7 @@ class _PentaDrawArrowPainter extends CustomPainter {
 
       var traveled = 0.0;
       var safety = 0;
-      while (traveled < segLen - 1e-9 && safety < 2000) {
-        safety++;
+      while (traveled < segLen - 1e-9 && safety++ < 2000) {
         final remainingToTarget = targetDistance - currentDistance;
         final take = math.min(remainingToTarget, segLen - traveled);
 

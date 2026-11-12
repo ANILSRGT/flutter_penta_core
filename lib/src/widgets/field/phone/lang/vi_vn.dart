@@ -204,12 +204,13 @@ class _VietnameseVnCountryNames {
     PentaPhoneFieldCountryCodesEnum.zimbabwe: 'Zimbabwe',
   };
 
-  static const _PhoneFieldStrings phoneFieldStrings = _PhoneFieldStrings(
-    phoneNumber: 'Số điện thoại',
-    selectCountry: 'Chọn quốc gia',
-    searchCountries: 'Tìm kiếm quốc gia...',
-    noCountriesFound: 'Không tìm thấy quốc gia',
-    phoneNumberValidationError:
-        'Số điện thoại phải có từ {minLength} đến {maxLength} chữ số',
-  );
+  static const PentaPhoneFieldStrings phoneFieldStrings =
+      PentaPhoneFieldStrings(
+        phoneNumber: 'Số điện thoại',
+        selectCountry: 'Chọn quốc gia',
+        searchCountries: 'Tìm kiếm quốc gia...',
+        noCountriesFound: 'Không tìm thấy quốc gia',
+        phoneNumberValidationError:
+            'Số điện thoại phải có từ {minLength} đến {maxLength} chữ số',
+      );
 }

@@ -1,3 +1,13 @@
+// Generates a Dart class with constants for every key of a translation JSON.
+//
+// Usage:
+//   dart run penta_core:lang_generator <input.json> <output_dir> <ClassName>
+//
+// Example:
+//   dart run penta_core:lang_generator assets/translations/en.json lib/generated LocaleKeys
+//
+// {"home": {"title": "Hi {}"}} → static const String homeTitleArgs1 = 'home.title';
+
 // ignore_for_file: avoid_print
 
 import 'dart:convert';
@@ -5,105 +15,167 @@ import 'dart:io';
 
 import 'package:ansicolor/ansicolor.dart';
 
+const _reservedWords = {
+  'abstract',
+  'as',
+  'assert',
+  'async',
+  'await',
+  'break',
+  'case',
+  'catch',
+  'class',
+  'const',
+  'continue',
+  'default',
+  'do',
+  'else',
+  'enum',
+  'export',
+  'extends',
+  'false',
+  'final',
+  'finally',
+  'for',
+  'if',
+  'import',
+  'in',
+  'is',
+  'new',
+  'null',
+  'return',
+  'super',
+  'switch',
+  'this',
+  'throw',
+  'true',
+  'try',
+  'var',
+  'void',
+  'while',
+  'with',
+};
+
+final _placeholder = RegExp(r'\{[^{}]*\}');
+
 Future<void> main(List<String> arguments) async {
-  final pen = AnsiPen()..white(bold: true);
+  final error = AnsiPen()..red(bold: true);
+  final info = AnsiPen()..green(bold: true);
 
   if (arguments.length < 3) {
-    pen.red(bold: true);
-    print(pen('Error: Arguments required'));
-    pen.yellow(bold: true);
+    print(error('Error: 3 arguments required.'));
     print(
-      pen(
-        'Usage: flutter pub run penta_core:lang_generator <input_json_file_path> <output_folder_path> <output_class_name>',
+      (AnsiPen()..yellow(bold: true))(
+        'Usage: dart run penta_core:lang_generator '
+        '<input_json_file> <output_folder> <OutputClassName>',
       ),
     );
-    pen.blue(bold: true);
     print(
-      pen(
-        'Example: flutter pub run penta_core:lang_generator ./assets/lang/en.json ./lib/generated LocaleKeys',
+      (AnsiPen()..blue(bold: true))(
+        'Example: dart run penta_core:lang_generator '
+        'assets/translations/en.json lib/generated LocaleKeys',
       ),
     );
-    exit(1);
+    exit(64);
   }
 
-  final inputFilePath = arguments[0];
-  final inputFile = File(inputFilePath);
+  final [inputPath, outputDir, className, ...] = arguments;
 
+  if (!RegExp(r'^[A-Z][A-Za-z0-9_]*$').hasMatch(className)) {
+    print(error('Error: "$className" is not a valid class name.'));
+    exit(64);
+  }
+
+  final inputFile = File(inputPath);
   if (!inputFile.existsSync()) {
-    pen.red(bold: true);
-    print('Error: File not found: $inputFilePath');
-    exit(1);
+    print(error('Error: File not found: $inputPath'));
+    exit(66);
   }
 
-  final inputJson =
-      jsonDecode(await inputFile.readAsString()) as Map<String, dynamic>;
-  final outputClass = arguments[2];
-  final outputFile = '${_toSnakeCase(outputClass)}.g.dart';
-
-  final constants = _generateConstants(inputJson);
-
-  final dartCode = '''
-// GENERATED CODE - DO NOT MODIFY BY HAND
-
-class $outputClass {
-  $outputClass._();
-
-${constants.entries.map((entry) {
-    final key = entry.key;
-    final value = entry.value;
-    final argsCount = _countPlaceholders(value['value']!);
-    final argsSuffix = argsCount > 0 ? 'Args$argsCount' : '';
-    return "\tstatic String get $key$argsSuffix => '${value['key']}';";
-  }).join('\n')}
-}
-''';
-
-  final outputFilePath = '${arguments[1]}/$outputFile';
-  final outputFileDir = Directory(arguments[1]);
-  if (!outputFileDir.existsSync()) {
-    await outputFileDir.create(recursive: true);
+  final Object? decoded;
+  try {
+    decoded = jsonDecode(await inputFile.readAsString());
+  } on FormatException catch (e) {
+    print(error('Error: Invalid JSON in $inputPath: ${e.message}'));
+    exit(65);
+  }
+  if (decoded is! Map<String, dynamic>) {
+    print(error('Error: Root of $inputPath must be a JSON object.'));
+    exit(65);
   }
 
-  await File(outputFilePath).writeAsString(dartCode);
-  print('Generated file: $outputFilePath');
+  final code = generate(decoded, className);
+  final outputFile = File('$outputDir/${_toSnakeCase(className)}.g.dart');
+  await outputFile.parent.create(recursive: true);
+  await outputFile.writeAsString(code);
+  print(info('Generated ${outputFile.path}'));
 }
 
-Map<String, Map<String, String>> _generateConstants(
-  Map<String, dynamic> json, [
-  String prefix = '',
-]) {
-  final constants = <String, Map<String, String>>{};
+/// Dart source for [json] keys inside a class named [className].
+String generate(Map<String, dynamic> json, String className) {
+  final entries = <String, String>{};
+  final used = <String>{};
 
-  json.forEach((key, value) {
-    if (value is Map<String, dynamic>) {
-      constants.addAll(_generateConstants(value, '$prefix$key.'));
-    } else {
-      final toKey = prefix.isNotEmpty ? '$prefix$key' : key;
-      final constantKey = _toCamelCase(toKey.split('.'));
-      constants[constantKey] = {'key': toKey, 'value': value.toString()};
-    }
+  void walk(Map<String, dynamic> map, String prefix) {
+    map.forEach((key, value) {
+      final fullKey = prefix.isEmpty ? key : '$prefix.$key';
+      if (value is Map<String, dynamic>) {
+        walk(value, fullKey);
+        return;
+      }
+      final argsCount = _placeholder.allMatches('$value').length;
+      final base =
+          _identifier(fullKey) + (argsCount > 0 ? 'Args$argsCount' : '');
+      var name = base;
+      for (var i = 2; !used.add(name); i++) {
+        name = '$base$i';
+      }
+      entries[name] = fullKey;
+    });
+  }
+
+  walk(json, '');
+
+  final buffer = StringBuffer()
+    ..writeln('// GENERATED CODE - DO NOT MODIFY BY HAND')
+    ..writeln('// Generated by penta_core:lang_generator')
+    ..writeln()
+    ..writeln('// ignore_for_file: constant_identifier_names')
+    ..writeln()
+    ..writeln('abstract final class $className {');
+  entries.forEach((name, key) {
+    buffer.writeln("  static const String $name = '${_escape(key)}';");
   });
-
-  return constants;
+  buffer.writeln('}');
+  return buffer.toString();
 }
 
-String _toCamelCase(List<String> parts) {
-  return parts.asMap().entries.map((entry) {
-    final index = entry.key;
-    final part = entry.value;
-    return index == 0 ? part : '${part[0].toUpperCase()}${part.substring(1)}';
-  }).join();
+String _identifier(String key) {
+  final parts = key
+      .split(RegExp('[^A-Za-z0-9]+'))
+      .where((part) => part.isNotEmpty)
+      .toList();
+  if (parts.isEmpty) return 'key';
+
+  final buffer = StringBuffer(parts.first[0].toLowerCase())
+    ..write(parts.first.substring(1));
+  for (final part in parts.skip(1)) {
+    buffer
+      ..write(part[0].toUpperCase())
+      ..write(part.substring(1));
+  }
+
+  var name = buffer.toString();
+  if (RegExp('^[0-9]').hasMatch(name)) name = 'k$name';
+  if (_reservedWords.contains(name)) name = '${name}Key';
+  return name;
 }
 
-String _toSnakeCase(String input) {
-  return input
-      .replaceAllMapped(
-        RegExp('([A-Z])'),
-        (match) => '_${match.group(0)!.toLowerCase()}',
-      )
-      .substring(1);
-}
+String _escape(String value) => value
+    .replaceAll(r'\', r'\\')
+    .replaceAll("'", r"\'")
+    .replaceAll(r'$', r'\$');
 
-int _countPlaceholders(String value) {
-  return RegExp('{([^}]*)}').allMatches(value).length;
-}
+String _toSnakeCase(String input) => input
+    .replaceAllMapped(RegExp('(?<=[a-z0-9])([A-Z])'), (match) => '_${match[1]}')
+    .toLowerCase();

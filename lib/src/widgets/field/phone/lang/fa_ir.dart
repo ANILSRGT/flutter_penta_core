@@ -202,12 +202,13 @@ class _PersianIrCountryNames {
     PentaPhoneFieldCountryCodesEnum.zimbabwe: 'زیمبابوه',
   };
 
-  static const _PhoneFieldStrings phoneFieldStrings = _PhoneFieldStrings(
-    phoneNumber: 'شماره تلفن',
-    selectCountry: 'انتخاب کشور',
-    searchCountries: 'جستجوی کشورها...',
-    noCountriesFound: 'کشوری یافت نشد',
-    phoneNumberValidationError:
-        'شماره تلفن باید بین {minLength} تا {maxLength} رقم باشد',
-  );
+  static const PentaPhoneFieldStrings phoneFieldStrings =
+      PentaPhoneFieldStrings(
+        phoneNumber: 'شماره تلفن',
+        selectCountry: 'انتخاب کشور',
+        searchCountries: 'جستجوی کشورها...',
+        noCountriesFound: 'کشوری یافت نشد',
+        phoneNumberValidationError:
+            'شماره تلفن باید بین {minLength} تا {maxLength} رقم باشد',
+      );
 }

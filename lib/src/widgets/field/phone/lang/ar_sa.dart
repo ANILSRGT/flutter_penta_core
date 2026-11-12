@@ -203,12 +203,13 @@ class _ArabicSaCountryNames {
     PentaPhoneFieldCountryCodesEnum.zimbabwe: 'زيمبابوي',
   };
 
-  static const _PhoneFieldStrings phoneFieldStrings = _PhoneFieldStrings(
-    phoneNumber: 'رقم الهاتف',
-    selectCountry: 'اختر البلد',
-    searchCountries: 'البحث عن البلدان...',
-    noCountriesFound: 'لم يتم العثور على بلدان',
-    phoneNumberValidationError:
-        'يجب أن يكون رقم الهاتف بين {minLength} و {maxLength} رقم',
-  );
+  static const PentaPhoneFieldStrings phoneFieldStrings =
+      PentaPhoneFieldStrings(
+        phoneNumber: 'رقم الهاتف',
+        selectCountry: 'اختر البلد',
+        searchCountries: 'البحث عن البلدان...',
+        noCountriesFound: 'لم يتم العثور على بلدان',
+        phoneNumberValidationError:
+            'يجب أن يكون رقم الهاتف بين {minLength} و {maxLength} رقم',
+      );
 }

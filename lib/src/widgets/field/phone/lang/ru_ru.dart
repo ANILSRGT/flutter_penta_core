@@ -206,7 +206,8 @@ class _RussianRuCountryNames {
     PentaPhoneFieldCountryCodesEnum.zimbabwe: 'Зимбабве',
   };
 
-  static const _PhoneFieldStrings phoneFieldStrings = _PhoneFieldStrings(
+  static const PentaPhoneFieldStrings
+  phoneFieldStrings = PentaPhoneFieldStrings(
     phoneNumber: 'Номер телефона',
     selectCountry: 'Выберите страну',
     searchCountries: 'Поиск стран...',

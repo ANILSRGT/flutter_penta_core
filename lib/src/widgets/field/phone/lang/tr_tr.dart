@@ -203,12 +203,13 @@ class _TurkishTrCountryNames {
     PentaPhoneFieldCountryCodesEnum.zimbabwe: 'Zimbabve',
   };
 
-  static const _PhoneFieldStrings phoneFieldStrings = _PhoneFieldStrings(
-    phoneNumber: 'Telefon numarası',
-    selectCountry: 'Ülke Seçin',
-    searchCountries: 'Ülkeleri ara...',
-    noCountriesFound: 'Ülke bulunamadı',
-    phoneNumberValidationError:
-        'Telefon numarası {minLength} ile {maxLength} haneli olmalıdır',
-  );
+  static const PentaPhoneFieldStrings phoneFieldStrings =
+      PentaPhoneFieldStrings(
+        phoneNumber: 'Telefon numarası',
+        selectCountry: 'Ülke Seçin',
+        searchCountries: 'Ülkeleri ara...',
+        noCountriesFound: 'Ülke bulunamadı',
+        phoneNumberValidationError:
+            'Telefon numarası {minLength} ile {maxLength} haneli olmalıdır',
+      );
 }

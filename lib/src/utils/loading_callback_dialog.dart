@@ -1,14 +1,25 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:penta_core/src/constants/app_values.dart';
-import 'package:penta_core/src/extensions/app_values/app_values_ext.dart';
 
-enum LoadingCallbackDialogCloseTypes { beforeCallback, afterCallback }
+enum LoadingCallbackDialogCloseTypes {
+  /// Close the dialog as soon as the future completes.
+  beforeCallback,
 
-final class LoadingCallbackDialog {
-  const LoadingCallbackDialog._();
+  /// Keep the dialog open until the callback completes.
+  afterCallback,
+}
 
+/// Shows a blocking loading dialog while a future runs.
+abstract final class LoadingCallbackDialog {
+  /// Runs [future] behind a loading dialog, then calls [callback].
+  ///
+  /// - The dialog is always closed, even when [future] or [callback] throws.
+  /// - Only the loading dialog is removed; other routes are never popped.
+  /// - With [cancelable], the user can dismiss the dialog (barrier, back
+  ///   button or cancel button). [cancelableCallback] is called and
+  ///   [callback] is skipped.
+  /// - Errors are passed to [onError] when given, otherwise rethrown.
   static Future<void> showLoadingDialog<T>({
     required BuildContext context,
     required Future<T> Function() future,
@@ -19,60 +30,92 @@ final class LoadingCallbackDialog {
     bool cancelable = false,
     FutureOr<void> Function()? cancelableCallback,
     String cancelButtonText = 'Cancel',
+    FutureOr<void> Function(Object error, StackTrace stackTrace)? onError,
+    bool useRootNavigator = true,
+    Color? barrierColor,
   }) async {
-    var isCanceled = false;
+    final navigator = Navigator.of(context, rootNavigator: useRootNavigator);
+    var closedByUs = false;
+    var canceled = false;
 
-    unawaited(() async {
-      isCanceled =
-          await showDialog<bool?>(
-            barrierDismissible: cancelable,
-            context: context,
-            builder: (context) {
-              return PopScope(
-                canPop: cancelable,
-                child:
-                    customLoading ??
-                    Center(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Center(
-                              child: CircularProgressIndicator.adaptive(),
-                            ),
-                            AppValues.md.ext.sizedBox.vertical,
-                            ElevatedButton(
-                              onPressed: () {
-                                isCanceled = true;
-                                Navigator.pop(context, true);
-                              },
-                              child: Text(cancelButtonText),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-              );
-            },
-          ) ??
-          false;
-      if (isCanceled) {
-        cancelableCallback?.call();
-      }
-    }());
+    late final DialogRoute<void> route;
+    route = DialogRoute<void>(
+      context: context,
+      barrierDismissible: cancelable,
+      barrierColor: barrierColor ?? Colors.black54,
+      useSafeArea: false,
+      builder: (dialogContext) => PopScope(
+        canPop: cancelable,
+        child:
+            customLoading ??
+            _DefaultLoading(
+              cancelButtonText: cancelable ? cancelButtonText : null,
+              onCancel: () => _removeRoute(navigator, route),
+            ),
+      ),
+    );
 
-    if (cancelable && isCanceled) return;
-    final value = await future();
-    if (cancelable && isCanceled) return;
-    if (closeType == LoadingCallbackDialogCloseTypes.beforeCallback &&
-        context.mounted) {
-      Navigator.pop(context);
+    void close() {
+      if (closedByUs) return;
+      closedByUs = true;
+      _removeRoute(navigator, route);
     }
-    await callback(value);
-    if (cancelable && isCanceled) return;
-    if (closeType == LoadingCallbackDialogCloseTypes.afterCallback &&
-        context.mounted) {
-      Navigator.pop(context);
+
+    unawaited(
+      navigator.push(route).then((_) async {
+        if (closedByUs) return;
+        closedByUs = true;
+        canceled = true;
+        await cancelableCallback?.call();
+      }),
+    );
+
+    try {
+      final value = await future();
+      if (canceled) return;
+      if (closeType == LoadingCallbackDialogCloseTypes.beforeCallback) close();
+      await callback(value);
+    } on Object catch (error, stackTrace) {
+      close();
+      if (canceled) return;
+      if (onError == null) rethrow;
+      await onError(error, stackTrace);
+    } finally {
+      close();
     }
+  }
+}
+
+/// Pops [route] with its animation when it is on top, otherwise removes it
+/// without touching the routes above.
+void _removeRoute(NavigatorState navigator, Route<void> route) {
+  if (!route.isActive) return;
+  if (route.isCurrent) {
+    navigator.pop();
+  } else {
+    navigator.removeRoute(route);
+  }
+}
+
+class _DefaultLoading extends StatelessWidget {
+  const _DefaultLoading({required this.onCancel, this.cancelButtonText});
+
+  final String? cancelButtonText;
+  final VoidCallback onCancel;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const CircularProgressIndicator.adaptive(),
+          if (cancelButtonText != null) ...[
+            const SizedBox(height: 12),
+            ElevatedButton(onPressed: onCancel, child: Text(cancelButtonText!)),
+          ],
+        ],
+      ),
+    );
   }
 }

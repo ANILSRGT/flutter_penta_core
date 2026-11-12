@@ -204,7 +204,8 @@ class _SwedishSeCountryNames {
     PentaPhoneFieldCountryCodesEnum.zimbabwe: 'Zimbabwe',
   };
 
-  static const _PhoneFieldStrings phoneFieldStrings = _PhoneFieldStrings(
+  static const PentaPhoneFieldStrings
+  phoneFieldStrings = PentaPhoneFieldStrings(
     phoneNumber: 'Telefonnummer',
     selectCountry: 'Välj land',
     searchCountries: 'Sök länder...',

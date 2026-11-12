@@ -1,55 +1,65 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
+
 typedef PentaDebounceable<S, T> = FutureOr<S?> Function(T parameter);
 
+/// Delays an action until calls stop for [duration].
+///
+/// Instance usage (search box):
+///
+/// ```dart
+/// final _debouncer = PentaDebouncer(const Duration(milliseconds: 400));
+/// onChanged: (q) => _debouncer.run(() => search(q)),
+/// // dispose(): _debouncer.dispose();
+/// ```
+///
+/// Function usage — superseded calls complete with `null`:
+///
+/// ```dart
+/// final search = PentaDebouncer.debounce<List<Item>, String>(
+///   debounceDuration: const Duration(milliseconds: 400),
+///   function: api.search,
+/// );
+/// final items = await search('query');
+/// ```
 class PentaDebouncer {
-  static PentaDebounceable<S, T> debounce<S, T>({
+  PentaDebouncer(this.duration);
+
+  final Duration duration;
+  Timer? _timer;
+
+  /// Whether an action is waiting to run.
+  bool get isPending => _timer?.isActive ?? false;
+
+  /// Schedules [action], cancelling the previously scheduled one.
+  void run(VoidCallback action) {
+    _timer?.cancel();
+    _timer = Timer(duration, action);
+  }
+
+  /// Cancels the pending action.
+  void cancel() => _timer?.cancel();
+
+  void dispose() => cancel();
+
+  /// Wraps [function] so only the last call within [debounceDuration] runs.
+  static Future<S?> Function(T parameter) debounce<S, T>({
     required Duration debounceDuration,
     required PentaDebounceable<S?, T> function,
   }) {
-    _PentaDebounceTimer? debounceTimer;
+    Timer? timer;
+    Completer<bool>? pending;
 
     return (T parameter) async {
-      if (debounceTimer != null && !debounceTimer!.isCompleted) {
-        debounceTimer!.cancel();
-      }
+      timer?.cancel();
+      if (pending != null && !pending!.isCompleted) pending!.complete(false);
 
-      debounceTimer = _PentaDebounceTimer(debounceDuration: debounceDuration);
+      final completer = pending = Completer<bool>();
+      timer = Timer(debounceDuration, () => completer.complete(true));
 
-      try {
-        await debounceTimer!.future;
-      } on _PentaCancelException {
-        return null;
-      }
-      return function(parameter);
+      if (!await completer.future) return null;
+      return await function(parameter);
     };
   }
-}
-
-class _PentaDebounceTimer {
-  _PentaDebounceTimer({
-    required Duration debounceDuration,
-  }) {
-    _timer = Timer(debounceDuration, _onComplete);
-  }
-
-  late final Timer _timer;
-  final Completer<void> _completer = Completer<void>();
-
-  void _onComplete() {
-    _completer.complete();
-  }
-
-  Future<void> get future => _completer.future;
-
-  bool get isCompleted => _completer.isCompleted;
-
-  void cancel() {
-    _timer.cancel();
-    _completer.completeError(const _PentaCancelException());
-  }
-}
-
-class _PentaCancelException implements Exception {
-  const _PentaCancelException();
 }

@@ -205,12 +205,13 @@ class _BengaliBdCountryNames {
     PentaPhoneFieldCountryCodesEnum.zimbabwe: 'জিম্বাবুয়ে',
   };
 
-  static const _PhoneFieldStrings phoneFieldStrings = _PhoneFieldStrings(
-    phoneNumber: 'ফোন নম্বর',
-    selectCountry: 'দেশ নির্বাচন করুন',
-    searchCountries: 'দেশগুলি অনুসন্ধান করুন...',
-    noCountriesFound: 'কোন দেশ পাওয়া যায়নি',
-    phoneNumberValidationError:
-        'ফোন নম্বর {minLength} থেকে {maxLength} অঙ্কের মধ্যে হতে হবে',
-  );
+  static const PentaPhoneFieldStrings phoneFieldStrings =
+      PentaPhoneFieldStrings(
+        phoneNumber: 'ফোন নম্বর',
+        selectCountry: 'দেশ নির্বাচন করুন',
+        searchCountries: 'দেশগুলি অনুসন্ধান করুন...',
+        noCountriesFound: 'কোন দেশ পাওয়া যায়নি',
+        phoneNumberValidationError:
+            'ফোন নম্বর {minLength} থেকে {maxLength} অঙ্কের মধ্যে হতে হবে',
+      );
 }

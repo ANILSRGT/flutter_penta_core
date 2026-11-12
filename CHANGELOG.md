@@ -1,4 +1,117 @@
 # Changelog
+
+## 3.0.0
+
+Full rework of the package. Requires Dart 3.8 / Flutter 3.32.
+
+### Breaking changes and migration
+
+- **Single entry point.** Import only `package:penta_core/penta_core.dart`.
+  The `index.dart` barrel files and the `managers/` folder were removed.
+- **Extensions** are now zero-cost extension types. Usage through `.ext` is
+  unchanged, but the public type names changed (`ContextExtension` +
+  `ContextExt`, `StringExtension` + `StringExt`...).
+  - `context.ext.seperateGenerator(list, sep)` → `list.ext.separatedBy(sep)` (deprecated alias kept)
+  - `list.ext.firstOrNull(test)` → `firstWhereOrNull(test)` (deprecated alias kept)
+  - `list.ext.orderWithData(cmp)` → `sorted(cmp)` (deprecated alias kept)
+  - `map.ext.removeWhere(test)` → `whereNot(test)` (deprecated alias kept)
+  - `formatShort` moved from `int` to `num`.
+- **AppValues:** `AppValuesConfig` is now an immutable value class.
+  `AppValuesConfig.initialize(md: 14)` → `AppValues.configure(const AppValuesConfig(md: 14))`
+  (deprecated alias kept).
+- **Localization**
+  - `LocaleManager` is no longer generic; the notifier type is the public
+    `LocaleController<T>`. `LocaleManager.I.notifier` → `controller`.
+  - `LocaleManagerProvider` is now a `StatefulWidget` that owns its controller
+    (`LocaleManagerProvider.create` still works). The locale is no longer
+    reset when a parent rebuilds.
+  - `context.localeManagerNotifierRead` no longer subscribes to changes. Use
+    `localeManagerNotifierWatch`, or the `translate*(context)` helpers, in
+    `build`.
+  - The `<T extends Enum>` type parameter was removed from `translate`, `tr`
+    and the related helpers.
+  - The generator emits `static const String` fields instead of getters and
+    sanitizes keys that are not valid identifiers.
+- **WidgetStateMixin:** the state type is public now (`ViewState<S>` with
+  `ViewStateIdle/Busy/Success/Fail`). `ViewState.when` is generic.
+- **ResponseModel:** the duplicate `fold` extension and
+  `ResponseModelExtension` were removed. `castTo` is now a method of
+  `ResponseModelFail`.
+- **Toast**
+  - `PentaToastShowOptions`: `dissmissAll` → `dismissAll`,
+    `dissmissable` → `dismissible`, unused `stackCount` removed, new
+    `dismissOnTap`. `options` is optional in `show` and `showText`.
+  - `PentaToastConfig.customAnimation` receives the animation:
+    `(child, animation) => ...`.
+  - `PentaToastController.I.dispose()` → `dismissAll()`,
+    `dismissAndShowNext()` → `dismiss()` (deprecated aliases kept).
+- **Phone field**
+  - `PentaPhoneFieldCountryCodesEnum` carries `isoCode`, `dialCode`,
+    `minLength`, `maxLength`, `flag`, `countryName()` and `info()`.
+  - The unused `PentaPhoneFieldContainerConfig` was removed.
+  - A `phoneNumber.customBuilder` result is now wrapped in `Expanded`.
+- **Responsive:** breakpoints come from the nearest `PentaResponsiveWrapper`
+  (`PentaBreakpoints`). Static breakpoint getters return the defaults.
+- **Showcase:** `PentaShowcaseOverlayWrapper` is `const` and keeps its info key
+  in its state.
+- **Others:** `EmailValidationConstants` → `disposableEmailDomains` (`Set`).
+  `PentaDebouncer.debounce` returns `Future<S?> Function(T)`.
+  `PentaEventBus.destroy()` returns a `Future`. `IPentaCache` / `IPentaRouter`
+  are unchanged.
+- The unused `build`, `source_gen`, `path` and `build_runner` dependencies were
+  removed.
+
+### Bug fixes
+
+- `Color.ext.toMaterialColor` looped forever and produced wrong shades.
+- `String.ext.random*` threw a `RangeError` (`nextInt` limit).
+- `validPhoneWithPlus` contained a stray character and rejected valid numbers;
+  e-mail validation no longer rejects TLDs longer than 4 letters.
+- Duplicate entries in the disposable domain list; the lookup is now O(1).
+- `TimestampConverter.convertToDateTimeUTC` returned local time.
+- `ImageStringConverter` treated `data:` URIs as files and failed to decode
+  them. It now also works on web.
+- `LoadingCallbackDialog` left the dialog open when the future threw, could pop
+  the wrong route, and showed a cancel button when `cancelable` was false.
+- `LocaleManagerProvider.maybeOf` threw when no provider was present.
+- `translateWithNamedArgs` replaced only the first occurrence of a placeholder.
+- `WidgetStateMixin.executeState` crashed after `dispose`; exceptions are
+  now reported as a fail state.
+- `PentaResponsiveWrapper` custom breakpoints were silently ignored, and
+  `deviceSize` used physical instead of logical pixels.
+- `PentaResponsiveWidget` never removed its binding observer.
+- The showcase recreated its `GlobalKey` on every build, and the arrow painter
+  never cancelled its event bus subscription.
+- `PentaUnderlineText` leaked tap recognizers and ignored text scaling and RTL.
+- Toast: `boxShadow` and `maxToasts` were ignored, `copyWith` dropped
+  `customAnimation`, the animation controller outlived its widget, and showing
+  a toast before `PentaToast` was mounted crashed.
+- Phone field: changing `languageCode` had no effect, the `dropdown` selection
+  type did nothing, `keyboardType` was ignored, and colors were hard-coded
+  instead of coming from the theme.
+- `FirebaseExceptionConverter` ignored locales without a country code;
+  `invalid-credential` is now recognized.
+
+### Added
+
+- `ResponseModel.success/fail/guard`, `dataOrNull`, `errorOrNull`, `map`,
+  `then`, equality.
+- `ErrorModel.code/error/stackTrace`, `fromException`, `copyWith`.
+- Context: `padding`, `viewInsets`, `isKeyboardOpen`, `orientation`,
+  `widthPercent`, `navigator`, `messenger`, `unfocus`...
+- Extensions: `chunked`, `distinctBy`, `groupBy`, `getOrNull`, `withoutNulls`,
+  `getAs`, `remap`, `isBetween`, `capitalized`, `titleCase`, `toIntOrNull`,
+  `isDisposableEmail`, `lighten/darken`, `toHex`, `onColor`, `startOfDay`,
+  `endOfDay`, `isToday`, `isTomorrow`, `isYesterday`, `DateTimeLabels`,
+  `Uint8List.ext.toDataUri`, widget `expanded/flexible/align/onTap/opacity`.
+- `AppValues.x.ext.gap`, `sizedBox.square`, start/end directional paddings.
+- `PentaResponsiveSizeTypes.parentConstraints`, `PentaBreakpoints`,
+  `PentaResponsiveWrapper.value`.
+- `LocaleController.fallbackLocale`, `hasKey`, `LocaleManager.loadFromMap`.
+- `PentaPhoneFieldStrings` to override texts, `focusNode`, `autovalidateMode`.
+- `PentaDebouncer` instance API, `PentaEventBus.on<S>()`.
+- Test suite (60 tests).
+
 ## 2.1.0
 * Fixed localization arguments.
 * Added contextless translation methods:

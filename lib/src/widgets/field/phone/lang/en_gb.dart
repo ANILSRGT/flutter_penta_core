@@ -203,12 +203,13 @@ class _EnglishGbCountryNames {
     PentaPhoneFieldCountryCodesEnum.zimbabwe: 'Zimbabwe',
   };
 
-  static const _PhoneFieldStrings phoneFieldStrings = _PhoneFieldStrings(
-    phoneNumber: 'Phone number',
-    selectCountry: 'Select Country',
-    searchCountries: 'Search countries...',
-    noCountriesFound: 'No countries found',
-    phoneNumberValidationError:
-        'Phone number must be between {minLength} and {maxLength} digits',
-  );
+  static const PentaPhoneFieldStrings phoneFieldStrings =
+      PentaPhoneFieldStrings(
+        phoneNumber: 'Phone number',
+        selectCountry: 'Select Country',
+        searchCountries: 'Search countries...',
+        noCountriesFound: 'No countries found',
+        phoneNumberValidationError:
+            'Phone number must be between {minLength} and {maxLength} digits',
+      );
 }

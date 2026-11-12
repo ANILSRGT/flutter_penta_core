@@ -1,5 +1,6 @@
 part of 'penta_phone_field.dart';
 
+/// Dialing info of a country with a localized [countryName].
 @immutable
 class PentaPhoneFieldPhoneInfo {
   const PentaPhoneFieldPhoneInfo({
@@ -36,12 +37,12 @@ class PentaPhoneFieldPhoneInfo {
   }
 
   @override
-  int get hashCode {
-    return countryName.hashCode ^
-        countryCode.hashCode ^
-        dialCode.hashCode ^
-        flag.hashCode ^
-        minLength.hashCode ^
-        maxLength.hashCode;
-  }
+  int get hashCode => Object.hash(
+    countryName,
+    countryCode,
+    dialCode,
+    flag,
+    minLength,
+    maxLength,
+  );
 }

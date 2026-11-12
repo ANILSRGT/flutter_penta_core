@@ -14,7 +14,11 @@ Future<void> main() async {
   );
 
   runApp(
-    LocaleManagerProvider.create(defaultLocale: AppLocale.en, child: _MyApp()),
+    LocaleManagerProvider(
+      defaultLocale: AppLocale.en,
+      fallbackLocale: AppLocale.en,
+      child: _MyApp(),
+    ),
   );
 }
 
@@ -52,9 +56,9 @@ class _MyApp extends StatelessWidget {
             ],
             position: PentaToastPosition.bottomCenter,
             duration: Duration(seconds: 3),
-            maxToasts: 2,
+            maxToasts: 3,
           ),
-          child: child!,
+          child: child,
         );
       },
       home: Builder(
@@ -64,20 +68,19 @@ class _MyApp extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children:
-                      _pages
-                          .map(
-                            (page) => ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (_) => page.$1),
-                                );
-                              },
-                              child: Text(page.$2),
-                            ),
-                          )
-                          .toList(),
+                  children: _pages
+                      .map(
+                        (page) => ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (_) => page.$1),
+                            );
+                          },
+                          child: Text(page.$2),
+                        ),
+                      )
+                      .toList(),
                 ),
               ),
             ),

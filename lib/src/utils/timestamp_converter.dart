@@ -1,15 +1,11 @@
-final class TimestampConverter {
-  const TimestampConverter._();
+/// Conversions between epoch milliseconds and [DateTime].
+abstract final class TimestampConverter {
+  static DateTime convertToDateTimeLocal(int millisecondsSinceEpoch) =>
+      DateTime.fromMillisecondsSinceEpoch(millisecondsSinceEpoch);
 
-  static DateTime convertToDateTimeLocal(int millisecondsSinceEpoch) {
-    return DateTime.fromMillisecondsSinceEpoch(millisecondsSinceEpoch);
-  }
+  static DateTime convertToDateTimeUTC(int millisecondsSinceEpoch) =>
+      DateTime.fromMillisecondsSinceEpoch(millisecondsSinceEpoch, isUtc: true);
 
-  static DateTime convertToDateTimeUTC(int millisecondsSinceEpoch) {
-    return DateTime.fromMillisecondsSinceEpoch(millisecondsSinceEpoch);
-  }
-
-  static int convertToTimestamp(DateTime dateTime) {
-    return dateTime.millisecondsSinceEpoch;
-  }
+  static int convertToTimestamp(DateTime dateTime) =>
+      dateTime.millisecondsSinceEpoch;
 }

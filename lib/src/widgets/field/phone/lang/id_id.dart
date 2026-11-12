@@ -203,12 +203,13 @@ class _IndonesianIdCountryNames {
     PentaPhoneFieldCountryCodesEnum.zimbabwe: 'Zimbabwe',
   };
 
-  static const _PhoneFieldStrings phoneFieldStrings = _PhoneFieldStrings(
-    phoneNumber: 'Nomor telepon',
-    selectCountry: 'Pilih Negara',
-    searchCountries: 'Cari negara...',
-    noCountriesFound: 'Tidak ada negara ditemukan',
-    phoneNumberValidationError:
-        'Nomor telepon harus memiliki {minLength} hingga {maxLength} digit',
-  );
+  static const PentaPhoneFieldStrings phoneFieldStrings =
+      PentaPhoneFieldStrings(
+        phoneNumber: 'Nomor telepon',
+        selectCountry: 'Pilih Negara',
+        searchCountries: 'Cari negara...',
+        noCountriesFound: 'Tidak ada negara ditemukan',
+        phoneNumberValidationError:
+            'Nomor telepon harus memiliki {minLength} hingga {maxLength} digit',
+      );
 }

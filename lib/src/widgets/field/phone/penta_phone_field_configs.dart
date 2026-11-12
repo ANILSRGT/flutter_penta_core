@@ -62,6 +62,8 @@ class PentaPhoneFieldPhoneNumberConfig {
     this.onChanged,
     this.onSubmitted,
     this.customBuilder,
+    this.focusNode,
+    this.autovalidateMode,
   });
 
   final TextStyle? textStyle;
@@ -80,14 +82,20 @@ class PentaPhoneFieldPhoneNumberConfig {
   final Color? errorBorderColor;
   final double? borderWidth;
   final double? borderRadius;
+
+  /// Extra validation, run after the built-in length check.
   final String? Function(String?)? validator;
   final List<TextInputFormatter>? inputFormatters;
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
   final void Function(String)? onChanged;
   final void Function(String)? onSubmitted;
+
+  /// Replaces the text field. The result is placed inside an [Expanded].
   final Widget Function(BuildContext context, TextEditingController controller)?
   customBuilder;
+  final FocusNode? focusNode;
+  final AutovalidateMode? autovalidateMode;
 }
 
 /// Configuration for search and selection styling
@@ -147,32 +155,9 @@ class PentaPhoneFieldCountrySelectionConfig {
   final PentaPhoneFieldSearchSelectionConfig styling;
 }
 
-/// Configuration for container styling
-class PentaPhoneFieldContainerConfig {
-  const PentaPhoneFieldContainerConfig({
-    this.borderRadius = 8.0,
-    this.borderColor = const Color(0xFFE0E0E0), // Default light grey border
-    this.focusedBorderColor, // Optional custom focus border color
-    this.borderWidth = 1.0,
-    this.backgroundColor,
-    this.shadow,
-    this.gradient,
-  });
-
-  final double borderRadius;
-  final Color? borderColor;
-  final Color? focusedBorderColor;
-  final double borderWidth;
-  final Color? backgroundColor;
-  final List<BoxShadow>? shadow;
-  final Gradient? gradient;
-}
-
 /// Configuration for layout
 class PentaPhoneFieldLayoutConfig {
-  const PentaPhoneFieldLayoutConfig({
-    this.fieldSpacing = 12.0,
-  });
+  const PentaPhoneFieldLayoutConfig({this.fieldSpacing = 12.0});
 
   final double fieldSpacing;
 }

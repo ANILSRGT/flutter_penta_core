@@ -203,12 +203,13 @@ class _UrduPkCountryNames {
     PentaPhoneFieldCountryCodesEnum.zimbabwe: 'زمبابوے',
   };
 
-  static const _PhoneFieldStrings phoneFieldStrings = _PhoneFieldStrings(
-    phoneNumber: 'فون نمبر',
-    selectCountry: 'ملک منتخب کریں',
-    searchCountries: 'ممالک تلاش کریں...',
-    noCountriesFound: 'کوئی ملک نہیں ملا',
-    phoneNumberValidationError:
-        'فون نمبر {minLength} سے {maxLength} ہندسوں کے درمیان ہونا چاہیے',
-  );
+  static const PentaPhoneFieldStrings phoneFieldStrings =
+      PentaPhoneFieldStrings(
+        phoneNumber: 'فون نمبر',
+        selectCountry: 'ملک منتخب کریں',
+        searchCountries: 'ممالک تلاش کریں...',
+        noCountriesFound: 'کوئی ملک نہیں ملا',
+        phoneNumberValidationError:
+            'فون نمبر {minLength} سے {maxLength} ہندسوں کے درمیان ہونا چاہیے',
+      );
 }

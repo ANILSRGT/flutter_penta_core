@@ -4,11 +4,12 @@ analyzer:
   exclude:
     - "**/*.g.dart"
     - "**/*.freezed.dart"
+    - "example/**"
+    - build/**
   errors:
     document_ignores: ignore
     invalid_annotation_target: ignore
     lines_longer_than_80_chars: ignore
-    unused_field: ignore
 
 linter:
   rules:
@@ -18,4 +19,6 @@ linter:
     avoid_positional_boolean_parameters: false
     flutter_style_todos: false
     one_member_abstracts: false
+    # 3.0.0 keeps a few deprecated aliases to ease migration.
+    remove_deprecations_in_breaking_versions: false
     use_setters_to_change_properties: false

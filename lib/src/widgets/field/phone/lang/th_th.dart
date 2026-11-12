@@ -203,12 +203,13 @@ class _ThaiThCountryNames {
     PentaPhoneFieldCountryCodesEnum.zimbabwe: 'ซิมบับเว',
   };
 
-  static const _PhoneFieldStrings phoneFieldStrings = _PhoneFieldStrings(
-    phoneNumber: 'หมายเลขโทรศัพท์',
-    selectCountry: 'เลือกประเทศ',
-    searchCountries: 'ค้นหาประเทศ...',
-    noCountriesFound: 'ไม่พบประเทศ',
-    phoneNumberValidationError:
-        'หมายเลขโทรศัพท์ต้องมี {minLength} ถึง {maxLength} หลัก',
-  );
+  static const PentaPhoneFieldStrings phoneFieldStrings =
+      PentaPhoneFieldStrings(
+        phoneNumber: 'หมายเลขโทรศัพท์',
+        selectCountry: 'เลือกประเทศ',
+        searchCountries: 'ค้นหาประเทศ...',
+        noCountriesFound: 'ไม่พบประเทศ',
+        phoneNumberValidationError:
+            'หมายเลขโทรศัพท์ต้องมี {minLength} ถึง {maxLength} หลัก',
+      );
 }

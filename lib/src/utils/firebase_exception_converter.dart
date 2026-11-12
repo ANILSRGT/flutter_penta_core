@@ -1,52 +1,52 @@
-import 'package:flutter/material.dart';
+import 'dart:ui' show Locale;
 
-part 'firebase_langs/ar_sa.dart';
-part 'firebase_langs/de_de.dart';
-part 'firebase_langs/en_gb.dart';
-part 'firebase_langs/en_us.dart';
-part 'firebase_langs/es_es.dart';
-part 'firebase_langs/fr_fr.dart';
-part 'firebase_langs/ko_kr.dart';
-part 'firebase_langs/nl_nl.dart';
-part 'firebase_langs/pl_pl.dart';
-part 'firebase_langs/pt_pt.dart';
-part 'firebase_langs/ru_ru.dart';
-part 'firebase_langs/sv_se.dart';
-part 'firebase_langs/th_th.dart';
-part 'firebase_langs/tr_tr.dart';
-part 'firebase_langs/uk_ua.dart';
-part 'firebase_langs/ur_pk.dart';
-part 'firebase_langs/vi_vn.dart';
-part 'firebase_langs/zh_cn.dart';
+part 'firebase_exception_messages.dart';
 
-class FirebaseExceptionConverter {
-  const FirebaseExceptionConverter._();
+/// Converts Firebase Auth error codes into localized, user friendly messages.
+///
+/// ```dart
+/// on FirebaseAuthException catch (e) {
+///   final text = FirebaseExceptionConverter.getMessage(
+///     e.code,
+///     locale: Localizations.localeOf(context),
+///   );
+/// }
+/// ```
+///
+/// The locale is matched by `language_COUNTRY`, then by language only, and
+/// falls back to `en_US`.
+abstract final class FirebaseExceptionConverter {
+  static const _fallbackLocale = 'en_US';
+
+  static const _aliases = <String, String>{
+    'INVALID_LOGIN_CREDENTIALS': 'wrong-password',
+    'invalid-login-credentials': 'wrong-password',
+    'invalid-credential': 'wrong-password',
+  };
+
+  /// Supported `language_COUNTRY` keys.
+  static Iterable<String> get supportedLocales => _firebaseMessages.keys;
 
   static String getMessage(String code, {Locale? locale}) {
-    if (locale == null) return _FirebaseExceptionMessagesEnUS.getMessage(code);
+    final messages = _messagesFor(locale);
+    final normalized = code.startsWith('auth/') ? code.substring(5) : code;
+    final key = _aliases[normalized] ?? normalized;
+    return messages[key] ?? messages['_default']!;
+  }
 
-    final fullLocale = '${locale.languageCode}_${locale.countryCode}';
+  static Map<String, String> _messagesFor(Locale? locale) {
+    if (locale == null) return _firebaseMessages[_fallbackLocale]!;
 
-    return switch (fullLocale) {
-      'ar_SA' => _FirebaseExceptionMessagesArSA.getMessage(code),
-      'de_DE' => _FirebaseExceptionMessagesDeDE.getMessage(code),
-      'en_GB' => _FirebaseExceptionMessagesEnGB.getMessage(code),
-      'en_US' => _FirebaseExceptionMessagesEnUS.getMessage(code),
-      'es_ES' => _FirebaseExceptionMessagesEsES.getMessage(code),
-      'fr_FR' => _FirebaseExceptionMessagesFrFR.getMessage(code),
-      'ko_KR' => _FirebaseExceptionMessagesKoKR.getMessage(code),
-      'nl_NL' => _FirebaseExceptionMessagesNlNL.getMessage(code),
-      'pl_PL' => _FirebaseExceptionMessagesPlPL.getMessage(code),
-      'pt_PT' => _FirebaseExceptionMessagesPtPT.getMessage(code),
-      'ru_RU' => _FirebaseExceptionMessagesRuRU.getMessage(code),
-      'sv_SE' => _FirebaseExceptionMessagesSvSE.getMessage(code),
-      'th_TH' => _FirebaseExceptionMessagesThTH.getMessage(code),
-      'tr_TR' => _FirebaseExceptionMessagesTrTR.getMessage(code),
-      'uk_UA' => _FirebaseExceptionMessagesUkUA.getMessage(code),
-      'ur_PK' => _FirebaseExceptionMessagesUrPK.getMessage(code),
-      'vi_VN' => _FirebaseExceptionMessagesViVN.getMessage(code),
-      'zh_CN' => _FirebaseExceptionMessagesZhCN.getMessage(code),
-      _ => _FirebaseExceptionMessagesEnUS.getMessage(code),
-    };
+    final exact =
+        _firebaseMessages['${locale.languageCode}_${locale.countryCode}'];
+    if (exact != null) return exact;
+
+    final preferred = locale.languageCode == 'en' ? _fallbackLocale : null;
+    if (preferred != null) return _firebaseMessages[preferred]!;
+
+    for (final entry in _firebaseMessages.entries) {
+      if (entry.key.startsWith('${locale.languageCode}_')) return entry.value;
+    }
+    return _firebaseMessages[_fallbackLocale]!;
   }
 }

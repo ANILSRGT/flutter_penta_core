@@ -199,11 +199,12 @@ class _ChineseCnCountryNames {
     PentaPhoneFieldCountryCodesEnum.zimbabwe: '津巴布韦',
   };
 
-  static const _PhoneFieldStrings phoneFieldStrings = _PhoneFieldStrings(
-    phoneNumber: '电话号码',
-    selectCountry: '选择国家',
-    searchCountries: '搜索国家...',
-    noCountriesFound: '未找到国家',
-    phoneNumberValidationError: '电话号码必须是{minLength}到{maxLength}位数字',
-  );
+  static const PentaPhoneFieldStrings phoneFieldStrings =
+      PentaPhoneFieldStrings(
+        phoneNumber: '电话号码',
+        selectCountry: '选择国家',
+        searchCountries: '搜索国家...',
+        noCountriesFound: '未找到国家',
+        phoneNumberValidationError: '电话号码必须是{minLength}到{maxLength}位数字',
+      );
 }

@@ -199,11 +199,13 @@ class _KoreanKrCountryNames {
     PentaPhoneFieldCountryCodesEnum.zimbabwe: '짐바브웨',
   };
 
-  static const _PhoneFieldStrings phoneFieldStrings = _PhoneFieldStrings(
-    phoneNumber: '전화번호',
-    selectCountry: '국가 선택',
-    searchCountries: '국가 검색...',
-    noCountriesFound: '국가를 찾을 수 없습니다',
-    phoneNumberValidationError: '전화번호는 {minLength}자리에서 {maxLength}자리 사이여야 합니다',
-  );
+  static const PentaPhoneFieldStrings phoneFieldStrings =
+      PentaPhoneFieldStrings(
+        phoneNumber: '전화번호',
+        selectCountry: '국가 선택',
+        searchCountries: '국가 검색...',
+        noCountriesFound: '국가를 찾을 수 없습니다',
+        phoneNumberValidationError:
+            '전화번호는 {minLength}자리에서 {maxLength}자리 사이여야 합니다',
+      );
 }
